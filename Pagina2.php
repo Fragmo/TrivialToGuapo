@@ -61,14 +61,6 @@ and open the template in the editor.
     $('#contenedorPreguntas').hide();
     colocaBotonesEnEligeNivel();
     
-    //eventos de funciones
-//    $('#botonHistoria').click(function(){
-//        desplazaBotones();
-//            });
-//    $('#pp').click(function(){
-//        seleccionaNivel();
-//    });
-//            
     //creacion de funciones
     function desplazaBotones(id){
         // el que le pase el id funciona pero aun no he especificado ninguna funcion en concreto para nincugno       
@@ -93,10 +85,8 @@ and open the template in the editor.
     }
     
     function comprobarRespuesta(value){
-        
-        var aa = preguntas[0][6]
-        document.write(aa);
-        if(value == aa){// hay que hacerlo con el doble igual porque como son tipos diferntes, auqnue la palabra sea la misma dará mal
+       // document.write(preguntas[iz][der]);
+        if(value === preguntas[0][5]){// hay que hacerlo con el doble igual porque como son tipos diferntes, auqnue la palabra sea la misma dará mal
             $('#botonIngles').hide();
         }
     }
