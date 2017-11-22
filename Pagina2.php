@@ -12,6 +12,7 @@ and open the template in the editor.
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="js/jquery.raty.css" rel="stylesheet" type="text/css"/>
         <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/propioCss.css" rel="stylesheet" type="text/css"/>
  <!--la url DEL BODY BACKGROUND esta bien pero he puesto la BARRA EN MEDIO PARA QUE NO VAYA Y TRABAJAR MIENTRAS SIN ELLO-->
         <style>
             body{background-image: url("imagenes/logro_2.jpg"); background-size: cover;} 
@@ -84,10 +85,10 @@ and open the template in the editor.
         }
     }
     
-    function comprobarRespuesta(value){
-       // document.write(preguntas[iz][der]);
+    function comprobarRespuesta(value, id){
+       //document.write(id);
         if(value === preguntas[0][5]){// hay que hacerlo con el doble igual porque como son tipos diferntes, auqnue la palabra sea la misma dará mal
-            $('#botonIngles').hide();
+            $('#'+id+'').removeClass('btn-warning').addClass('btn-success');
         }
     }
     function colocaBotonesEnContenedorPreguntasYSeleccionaNivel(id){
@@ -101,7 +102,7 @@ and open the template in the editor.
                     if(i === 0){
                         $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ preguntas[0][0] +'" style="margin-top: 56px;"></button> ');
                     }else{
-                        $('#contenedorPreguntas').append('<input type="button" id="respuesta'+i+'" class="btn btn-warning btn-block" value="'+ preguntas[0][i] +'" onclick="comprobarRespuesta(this.value)"> </button> ');
+                        $('#contenedorPreguntas').append('<input type="button" id="respuesta'+i+'" class="btn btn-warning btn-block" value="'+ preguntas[0][i] +'" onclick="comprobarRespuesta(this.value, this.id)"> </button> ');
 
                     }
         }
