@@ -92,7 +92,14 @@ and open the template in the editor.
         }
     }
     
-    
+    function comprobarRespuesta(value){
+        
+        var aa = preguntas[0][6]
+        document.write(aa);
+        if(value == aa){// hay que hacerlo con el doble igual porque como son tipos diferntes, auqnue la palabra sea la misma dará mal
+            $('#botonIngles').hide();
+        }
+    }
     function colocaBotonesEnContenedorPreguntasYSeleccionaNivel(id){
                 //ajusto las preguntas al resto de la pantalla y elimino los niveles para mayor visibilidad
                 $('#contenedorNiveles').hide();
@@ -102,13 +109,15 @@ and open the template in the editor.
                 //coloco los botones de las preguntas
                 for(var i = 0; i<5; i++){
                     if(i === 0){
-                        $('#contenedorPreguntas').append('<button id="Pregunta" class="btn btn-info btn-block" style="margin-top: 56px;">'+ preguntas[0][0] +'</button> ');
+                        $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ preguntas[0][0] +'" style="margin-top: 56px;"></button> ');
                     }else{
-                        $('#contenedorPreguntas').append('<button id="respuesta'+i+'" class="btn btn-warning btn-block">'+ preguntas[0][i] + ' </button> ');
+                        $('#contenedorPreguntas').append('<input type="button" id="respuesta'+i+'" class="btn btn-warning btn-block" value="'+ preguntas[0][i] +'" onclick="comprobarRespuesta(this.value)"> </button> ');
 
                     }
         }
     }
+    
+
         </script>
     </body>
 </html>
