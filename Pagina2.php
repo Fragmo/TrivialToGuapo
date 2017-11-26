@@ -27,7 +27,7 @@ and open the template in the editor.
         <div class="container " id="containerTrivial">
             <div class="row">
                 <div class="col-md-3" ></div>
-                <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">TRIVIAL TO GUAPO!</h1></div>
+                <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">Trivial To Guapo!</h1></div>
                 <div class="col-md-3" > Hola Marc <button id="botonSalirSesion" class="btn btn-primary pull-right">Salir</button></div>
             </div>
             
@@ -57,14 +57,19 @@ and open the template in the editor.
 
         
         <script>
+    var numeroAleatorio = ocutaNivelesMuestraPregunta();//¿poner var?
+    var preguntasRepetidas = [];    
+    
     //ordenes a realizar inmediatamente
     $('#contenedorNiveles').hide();
     $('#contenedorPreguntas').hide();
-    colocaBotonesEnEligeNivel();
+     colocaBotonesEnEligeNivel();
     
     //creacion de funciones
     function desplazaBotones(id){
         // el que le pase el id funciona pero aun no he especificado ninguna funcion en concreto para nincugno       
+               
+                
                 $('#espacioIz').hide();
                 $('#containerTrivial').css({ 'float': 'left', 'margin-left' : '30px'});
                 $('#espacioDer').removeClass('col-md-3').addClass('col-md-6');
@@ -79,20 +84,45 @@ and open the template in the editor.
     }
     
     
-    function colocaBotonesEnEligeNivel (){
+    function colocaBotonesEnEligeNivel (id){
         for(var i = 1; i<10; i++){
-            $('#contenedorNiveles').append('<button id="nivel'+i+'" class="btn btn-info" style="margin-left: 3px; margin-top: 3px;" onclick="colocaBotonesEnContenedorPreguntasYSeleccionaNivel()"> Nivel '+ i + ' </button> ');
+            $('#contenedorNiveles').append('<button id="nivel'+i+'" class="btn btn-info" style="margin-left: 3px; margin-top: 3px;" onclick="ocutaNivelesMuestraPregunta()"> Nivel '+ i + ' </button> ');
         }
     }
     
-    function comprobarRespuesta(value, id){
-       //document.write(id);
-        if(value === preguntas[0][5]){// hay que hacerlo con el doble igual porque como son tipos diferntes, auqnue la palabra sea la misma dará mal
+    function comprobarRespuesta( id){
+        // este método comprueba la pregunta y pasa a la siguiente en caso de que la respuesta sea correcta
+       var numeroPregunta = id; 
+        //numeroAleatorio = Math.floor(Math.random() * preguntas.length);
+
+        if(numeroPregunta.charAt(numeroPregunta.length-1) === preguntas[numeroAleatorio][5]){
+            preguntasRepetidas.push(numeroAleatorio);
             $('#'+id+'').removeClass('btn-warning').addClass('btn-success');
+            $('#'+id+'').fadeOut('slow');//efecto to guapo para decir que has acertado
+            $('#'+id+'').fadeIn('slow', function (){
+                                        $('#contenedorPreguntas').text('').unbind();
+                                        // para que no se bugge
+                                        ocutaNivelesMuestraPregunta();
+            });
+           
+        }else{
+            $('#'+id+'').removeClass('btn-warning').addClass('btn-danger');
         }
     }
-    function colocaBotonesEnContenedorPreguntasYSeleccionaNivel(id){
-                //ajusto las preguntas al resto de la pantalla y elimino los niveles para mayor visibilidad
+    function ocutaNivelesMuestraPregunta(){//poner id en el pasador de parametros??
+                
+                numeroAleatorio = Math.floor(Math.random() * preguntas.length);
+//                para que no se repitan las preguntas
+                if(preguntasRepetidas > 0){
+                    for(var i = 0; i<preguntasRepetidas.length; i ++){
+                    if(numeroAleatorio === preguntasRepetidas[i]){
+                        ocutaNivelesMuestraPregunta();
+                    }
+                }
+                }
+                
+                
+                //ajusto las preguntas al resto de la pantalla y elimino los niveles para mayor visibilidad                
                 $('#contenedorNiveles').hide();
         
                 $('#contenedorPreguntas').removeClass('col-md-3').addClass('col-md-6').css({ 'width': '100%'}).fadeIn("slow"); 
@@ -100,12 +130,13 @@ and open the template in the editor.
                 //coloco los botones de las preguntas
                 for(var i = 0; i<5; i++){
                     if(i === 0){
-                        $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ preguntas[0][0] +'" style="margin-top: 56px;"></button> ');
+                        $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ preguntas[numeroAleatorio][0] +'" style="margin-top: 56px;"></button> ');
                     }else{
-                        $('#contenedorPreguntas').append('<input type="button" id="respuesta'+i+'" class="btn btn-warning btn-block" value="'+ preguntas[0][i] +'" onclick="comprobarRespuesta(this.value, this.id)"> </button> ');
+                        $('#contenedorPreguntas').append('<input type="button" id="respuesta'+i+'" class="btn btn-warning btn-block" value="'+ preguntas[numeroAleatorio][i] +'" onclick="comprobarRespuesta(this.id)"> </button> ');
 
                     }
         }
+        return numeroAleatorio;
     }
     
 
