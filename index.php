@@ -81,7 +81,20 @@ and open the template in the editor.
             </div><!--row-->
             
         </div><!--Container-->
+        <?php
+         define("host", "localhost");
+         define("usuario", "root");
+         define("contraseña", "");
+         define("bbdd", "trivial");
         
+        ?>
+        <?php
+        $creaConexion = new mysqli(host, usuario, contraseña, bbdd);
+        if($creaConexion->errno >0){
+            die("No ha sido posible conectarse a la base de datos [". $creaConexion->connect_error. "]");
+        }
+        
+        ?>
         <script>
           ocultaCosas(); // funcion a hacer nada mas empezar
           

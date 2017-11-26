@@ -41,13 +41,14 @@ and open the template in the editor.
                     <input type="button" value="Lengua" id="botonLengua" class="btn btn-info btn-block" name="botonLengua" onclick="desplazaBotones(this.id)"/>
                     <input type="button" value="Inglés" id="botonIngles" class="btn btn-danger btn-block" name="botonIngles" onclick="desplazaBotones(this.id)"/>
                 </div><!--colmd5-->
-                <div class="col-md-3 text-center" id="espacioDer" > <!----------->
+                <div class="col-md-3 text-center" id="espacioDer"> <!----------->
                     <div id="contenedorNiveles" class="col-md-3 btn-group " style=" width: 50%; height: 100%;"><!----------->
                         <h3 style="margin-top:70px;"><b>Selecciona un nivel;)</b></h3>
                         
-                    </div>
+                    </div> 
                     
                     <div id="contenedorPreguntas" class="col-md-3" style=" width: 50%; height: 100%;" ><!----------->
+                        
                     </div>
                     
                 </div><!--ESPACIODER-->
@@ -58,7 +59,9 @@ and open the template in the editor.
         
         <script>
     var numeroAleatorio = ocutaNivelesMuestraPregunta();//¿poner var?
-    var preguntasRepetidas = [];    
+    var preguntasRepetidas = []; 
+    var puntuacion = 0;
+    var numeroFallos = 0;
     
     //ordenes a realizar inmediatamente
     $('#contenedorNiveles').hide();
@@ -93,10 +96,15 @@ and open the template in the editor.
     function comprobarRespuesta( id){
         // este método comprueba la pregunta y pasa a la siguiente en caso de que la respuesta sea correcta
        var numeroPregunta = id; 
+        numeroFallos;
         //numeroAleatorio = Math.floor(Math.random() * preguntas.length);
-
+       
         if(numeroPregunta.charAt(numeroPregunta.length-1) === preguntas[numeroAleatorio][5]){
-            preguntasRepetidas.push(numeroAleatorio);
+            preguntasRepetidas.push(numeroAleatorio); 
+            if(numeroFallos === 0){
+               puntuacion += 10; 
+            }
+            
             $('#'+id+'').removeClass('btn-warning').addClass('btn-success');
             $('#'+id+'').fadeOut('slow');//efecto to guapo para decir que has acertado
             $('#'+id+'').fadeIn('slow', function (){
@@ -106,31 +114,27 @@ and open the template in the editor.
             });
            
         }else{
+            numeroFallos++;
             $('#'+id+'').removeClass('btn-warning').addClass('btn-danger');
+            puntuacion -= 10;
+            $('#respuesta'+preguntas[numeroAleatorio][5] +'').removeClass('btn-warning').addClass('btn-success');
         }
+        return numeroAleatorio;
     }
     function ocutaNivelesMuestraPregunta(){//poner id en el pasador de parametros??
                 
-                numeroAleatorio = Math.floor(Math.random() * preguntas.length);
-//                para que no se repitan las preguntas
-                if(preguntasRepetidas > 0){
-                    for(var i = 0; i<preguntasRepetidas.length; i ++){
-                    if(numeroAleatorio === preguntasRepetidas[i]){
-                        ocutaNivelesMuestraPregunta();
-                    }
-                }
-                }
+                numeroRepetido();
                 
-                
-                //ajusto las preguntas al resto de la pantalla y elimino los niveles para mayor visibilidad                
+                 //ajusto las preguntas al resto de la pantalla y elimino los niveles para mayor visibilidad                
                 $('#contenedorNiveles').hide();
         
                 $('#contenedorPreguntas').removeClass('col-md-3').addClass('col-md-6').css({ 'width': '100%'}).fadeIn("slow"); 
                 
                 //coloco los botones de las preguntas
+                $('#contenedorPreguntas').append('<h3 class="text-center"><b>Puntuación:'+ puntuacion +'</b></h3>');
                 for(var i = 0; i<5; i++){
                     if(i === 0){
-                        $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ preguntas[numeroAleatorio][0] +'" style="margin-top: 56px;"></button> ');
+                        $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ preguntas[numeroAleatorio][0] +'" style="margin-top: 11px;"></button> ');
                     }else{
                         $('#contenedorPreguntas').append('<input type="button" id="respuesta'+i+'" class="btn btn-warning btn-block" value="'+ preguntas[numeroAleatorio][i] +'" onclick="comprobarRespuesta(this.id)"> </button> ');
 
@@ -139,7 +143,16 @@ and open the template in the editor.
         return numeroAleatorio;
     }
     
-
+    function numeroRepetido() {
+    numeroAleatorio = Math.floor(Math.random() * preguntas.length);
+        if(preguntasRepetidas > 0){
+            for(var i = 0; i<preguntasRepetidas.length; i ++){
+                if(numeroAleatorio === preguntasRepetidas[i]){
+                        numeroRepetido();
+                }
+            }   
+    }    
+}
         </script>
     </body>
 </html>
