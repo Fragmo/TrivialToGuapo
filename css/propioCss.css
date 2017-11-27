@@ -24,6 +24,6 @@ and open the template in the editor.
         100% {color:red;}
 
             }
-            #divFormulario{ animation-name: cambioColorFormulario; animation-duration: 7s; animation-iteration-count: infinite;}
+            #divFormulario, #contenedorFormularioRegistro{ animation-name: cambioColorFormulario; animation-duration: 7s; animation-iteration-count: infinite;}
             .cambiaColorTexto{ animation-name: cambioTexto; animation-duration: 7s; animation-iteration-count: infinite;}
             

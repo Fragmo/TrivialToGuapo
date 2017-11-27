@@ -87,7 +87,7 @@ and open the template in the editor.
     }
     
     
-    function colocaBotonesEnEligeNivel (id){
+    function colocaBotonesEnEligeNivel (){
         for(var i = 1; i<10; i++){
             $('#contenedorNiveles').append('<button id="nivel'+i+'" class="btn btn-info" style="margin-left: 3px; margin-top: 3px;" onclick="ocutaNivelesMuestraPregunta()"> Nivel '+ i + ' </button> ');
         }

@@ -5,9 +5,23 @@
  */
 
 var preguntas = [
-["¿Cuanto es 2 * 4?","1","8","3","12","2"],
-["cuantas patas tiene un perro?","5","8","4","12","3"],
-["cuantos litros hay que beber","89","8","3","2","4"],
-["cuantos satelites tiene la tierra","19","1","3","12","2"]
+["historia","correcto","8","3","12","1"],
+["historia","5","correcto","4","12","2"],
+["historia","89","8","correcto","2","3"],
+["historia","19","1","3","correcto","4"],
 
+["filosofia","correcto","8","3","12","1"],
+["filosofia","5","correcto","4","12","2"],
+["filosofia","89","8","correcto","2","3"],
+["filosofia","19","1","3","correcto","4"],
+
+["lengua","correcto","8","3","12","1"],
+["lengua","5","correcto","4","12","2"],
+["lengua","89","8","correcto","2","3"],
+["lengua","19","1","3","correcto","4"],
+
+["ingles","correcto","8","3","12","1"],
+["ingles","5","correcto","4","12","2"],
+["ingles","89","8","correcto","2","3"],
+["ingles","19","1","3","correcto","4"]
 ];
