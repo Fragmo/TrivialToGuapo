@@ -1,13 +1,13 @@
 <?php
          define("host", "localhost");
          define("usuario", "root");
-         define("contraseña", "");
+         define("contrasena", "");
          define("bbdd", "trivial");
         
 ?>
 
 <?php
-        $creaConexion = new mysqli(host, usuario, contraseña, bbdd);
+        $creaConexion = new mysqli(host, usuario, contrasena, bbdd);
         if($creaConexion->errno >0){
             die("No ha sido posible conectarse a la base de datos [". $creaConexion->connect_error. "]");
         }
@@ -17,7 +17,7 @@
                     // enlaza los campos rellenados con las variables de php
                     $nombreUsuario=$_POST['nombreUsuario'];
                     $correoElectronico=$_POST['correoElectronico'];
-                    $contraseña= $_POST['contraseña'];
+                    $contrasena= $_POST['contrasena'];
                     $confirmarContraseña=$_POST['confirmarContraseña'];
                     
                     //comprueba si esta repetido el email y el nombre de usuario
@@ -28,29 +28,28 @@
                     $checkeaNombreUsuario=mysqli_query($creaConexion,"SELECT * FROM usuarios WHERE nombre='$nombreUsuario'");
                     $numeroVecesNombreUsuario=mysqli_num_rows($checkeaNombreUsuario);
                         
-                        if( ($contraseña === $confirmarContraseña) && ($contraseña !=="") && ($confirmarContraseña !=="") ){
+                        if( ($contrasena === $confirmarContraseña) && ($contrasena !=="") && ($confirmarContraseña !=="") ){
                             if( ($numeroVecesEmail >0) || ($numeroVecesNombreUsuario >0)){
                                 if($numeroVecesEmail >0){ 
                                     echo '<script language="javascript">alert("El email ya ha sido registrado");</script>';
                                 }else{
                                     echo '<script language="javascript">alert("El nombre de usuario    '.$nombreUsuario .'   ya esta creado");</script>';
                                 }
+                            }else{// CASO BUENO
+                                $registraUsuario = "INSERT INTO usuarios (email, nombre, contrasena) VALUES ('".$correoElectronico."','".$nombreUsuario."','".$contrasena."')";
+                                $creaConexion->query($registraUsuario);
+                                
+                                if($creaConexion->errno){
+                                    die("<p>no ha sido posible insertar datos en la tabla . $creaConexion->error");
+                                }else{
+                                    echo ' <script language="javascript">alert("Usuario registrado con éxito");</script> ';
+                                }  
                             }
                             
                         }else{
-                            echo '<script language="javascript">alert("las contraseñas son incorrectas o no has rellenado los campos");</script>';
+                            echo '<script language="javascript">alert("las contrasenas son incorrectas o no has rellenado los campos");</script>';
                         }
-                    
-                    
-                    // insertar usuario en la bbdd
-               //    $registraUsuario = "INSERT INTO usuarios (email, nombre, contraseña) VALUES ('$correoElectronico','$nombreUsuario','$contraseña')";
-               //    $creaConexion->query($registraUsuario);
-               //    if($creaConexion->errno){
-               //         die("<p>no ha sido posible insertar datos en la tabla . $creaConexion->error");
-               //    }
 
-            
-        
 		
 ?>
         

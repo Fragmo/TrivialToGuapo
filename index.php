@@ -49,13 +49,13 @@ and open the template in the editor.
                                 </tr>
                                 <tr>
                                     <td>Contraseña</td>
-                                    <td> <input type="password"  name="contraseña"  /></td>
+                                    <td> <input type="password"  name="contrasena"  /></td>
                                 </tr>
                             </tbody>
                         </table>
 
                         <br>
-                       <!-- <p class="text-center">Mostrar contraseña<input style=" margin-left: 10px;" type="checkbox" name="botonMuestraContraseña" id="botonMuestraContraseña" value="OFF" /></p>-->
+                       <!-- <p class="text-center">Mostrar contrasena<input style=" margin-left: 10px;" type="checkbox" name="botonMuestraContraseña" id="botonMuestraContraseña" value="OFF" /></p>-->
                         <input type="submit" value="Enviar" name="botonEnviarFormulario" id="botonEnviarFormulario" class="btn btn-primary btn-success " style="margin-left: 20%;" /> 
                         <input type="reset" value="Borrar" name="botonBorrarFormulario" id="botonBorrarFormulario"  class="btn btn-primary  btn-danger "   />
                         <input type="button" value="Registrarse" name="botonRegistrarse" id="botonRegistrarse" class="btn btn-primary  btn-info "  onclick="muestraFormularioRegistro();" />
@@ -86,7 +86,7 @@ and open the template in the editor.
                                 </tr>
                                 <tr>
                                     <td>Contraseña</td>
-                                    <td> <input type="password"  name="contraseña"  /></td>
+                                    <td> <input type="password"  name="contrasena"  /></td>
                                 </tr>
                             </tbody>
                         </table>
