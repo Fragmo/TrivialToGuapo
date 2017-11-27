@@ -29,7 +29,7 @@ and open the template in the editor.
             
             <div class="row"> <!--MENU ARRIBA-->
                 <div class="col-md-3" ></div>
-                <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">TRIVIAL TO GUAPO!</h1></div>
+                <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">HACER QUE LOS ISSET VAYAN BIEN, SOLO FUNCIONA SI UNO SE COMENTAAAAA</h1></div>
                 <div class="col-md-3" > Hola Marc <button id="botonSalirSesion" class="btn btn-primary pull-right">Salir</button></div>
             </div><!--FIN MENU ARRIBA-->
             
@@ -105,9 +105,14 @@ and open the template in the editor.
             </div><!--row-->
         </div><!--Container-->
         <?php
-		if(isset($_POST['botonEnviarFormularioRegistro'])){
-			require("registroToGuapo.php");
+//		if(isset($_POST['botonEnviarFormularioRegistro'])){
+//			require("registroToGuapo.php");
+//		}
+                
+                if(isset($_POST['botonEnviarFormulario'])){
+			require("loginToGuapo.php");
 		}
+                
 	?>
         <script>
           $('#contenedorFormularioRegistro').hide(); // funcion a hacer nada mas empezar
