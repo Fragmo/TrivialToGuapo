@@ -1,5 +1,5 @@
 <?php
-session_start(); // iniciamos sesion
+//session_start(); // iniciamos sesion
 
          define("host", "localhost");
          define("usuario", "root");
@@ -17,11 +17,10 @@ session_start(); // iniciamos sesion
          $queryCompruebaNombre = mysqli_query($creaConexion, "SELECT nombre FROM usuarios WHERE nombre = '$nombreUsuarioLogin'") ;
          // coge la contraseña de verdad para más tarde compararla con la puesta y ver si esta bien
          $querySeleccionaContrasena = mysqli_query($creaConexion,"SELECT contrasena FROM usuarios WHERE contrasena ='$contrasenaLogin'");
-         
          $numeroVecesNombreUsuarioLogin=mysqli_num_rows($queryCompruebaNombre);
-         echo ' <script language="javascript">alert('.$numeroVecesNombreUsuarioLogin.');</script> ';
+         
          if($numeroVecesNombreUsuarioLogin > 0){
-             if($querySeleccionaContrasena === $contrasenaLogin){
+             if( $contrasenaLogin = mysqli_fetch_assoc($querySeleccionaContrasena)){
                  
                  echo "<script>location.href='Pagina2.php'</script>";
              }else{
@@ -33,3 +32,4 @@ session_start(); // iniciamos sesion
 
 
 ?>
+
