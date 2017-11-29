@@ -24,10 +24,7 @@ and open the template in the editor.
         <script src="js/jquery.raty.js" type="text/javascript"></script>
     </head> 
     <body>
-        <?php //COMPROBAR SI ESTO ESTA BIEN
-     //   session_start();
-        require ('phpPagina2.php');
-        ?>
+
         <div class="container " id="containerTrivial">
             <div class="row">
                 <div class="col-md-3" ></div>
@@ -60,7 +57,10 @@ and open the template in the editor.
          
         </div><!--Container-->
 
-        
+                <?php //COMPROBAR SI ESTO ESTA BIEN
+     //   session_start();
+        require ('phpPagina2_1.php');
+        ?>
         <script>
     var numeroAleatorio = ocutaNivelesMuestraPregunta();//¿poner var?
     var preguntasRepetidas = []; 

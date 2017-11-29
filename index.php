@@ -45,11 +45,11 @@ and open the template in the editor.
                             <tbody>
                                 <tr>
                                     <td>Nombre de usuario</td>
-                                    <td> <input type="text" required="Ingresa tu nick" name="nombreUsuario" placeholder="pepito" /> </td>
+                                    <td> <input value="wacamole"type="text" required="Ingresa tu nick" name="nombreUsuario" placeholder="pepito" /> </td>
                                 </tr>
                                 <tr>
                                     <td>Contraseña</td>
-                                    <td> <input type="password" required="Ingresa tu contraseña"  name="contrasena"  /></td>
+                                    <td> <input value="waca" type="password" required="Ingresa tu contraseña"  name="contrasena"  /></td>
                                 </tr>
                             </tbody>
                         </table>

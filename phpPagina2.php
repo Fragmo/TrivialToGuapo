@@ -31,8 +31,8 @@ $preguntas = $creaConexion->query($cogeArrayPreguntas);
         $arrayPreguntas[$i] = $row;
         $i++;
     }
-   
-    // PONER ESTO PARA PASAR LAS EL ARRAY DE PREGUNTAS(JUSTO DESPUES DE Pagina2.php) ?preguntas=$arrayPreguntas
+    echo $arrayPreguntas[100][2];
+//                                  ?preguntas=$arrayPreguntas
             echo "<script>location.href='Pagina2.php'</script>";
         }
 ?>
