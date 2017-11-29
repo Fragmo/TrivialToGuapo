@@ -24,11 +24,15 @@ and open the template in the editor.
         <script src="js/jquery.raty.js" type="text/javascript"></script>
     </head> 
     <body>
+        <?php //COMPROBAR SI ESTO ESTA BIEN
+     //   session_start();
+        require ('phpPagina2.php');
+        ?>
         <div class="container " id="containerTrivial">
             <div class="row">
                 <div class="col-md-3" ></div>
                 <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">Trivial To Guapo!</h1></div>
-                <div class="col-md-3" > Hola Marc <button id="botonSalirSesion" class="btn btn-primary pull-right">Salir</button></div>
+                <div class="col-md-3" > <button name="botonNombreUsuario" class="btn btn-warning text-center"><b>Hola <?php echo $_GET['usuario']; ?></b></button>  <a href="index.php"><button id="botonSalirSesion" class="btn btn-primary pull-right">Salir</button></a></div>
             </div>
             
             <div class="row" style="margin-top: 10%;"> <!-- TIENE EL CONTENIDO BUENO CON LAS PREGUNTAS ETC-->
@@ -62,11 +66,10 @@ and open the template in the editor.
     var preguntasRepetidas = []; 
     var puntuacion = 0;
     var numeroFallos = 0;
-    
-    //ordenes a realizar inmediatamente
     $('#contenedorNiveles').hide();
     $('#contenedorPreguntas').hide();
      colocaBotonesEnEligeNivel();
+     //var preguntas = <?php //echo $_GET['preguntas'];  ?>;
     
     //creacion de funciones
     function desplazaBotones(id){

@@ -29,8 +29,8 @@ and open the template in the editor.
             
             <div class="row"> <!--MENU ARRIBA-->
                 <div class="col-md-3" ></div>
-                <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">HACER QUE LOS ISSET VAYAN BIEN, SOLO FUNCIONA SI UNO SE COMENTAAAAA</h1></div>
-                <div class="col-md-3" > Hola Marc <button id="botonSalirSesion" class="btn btn-primary pull-right">Salir</button></div>
+                <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">TRIVIAL TO GUAPO!</h1></div>
+                <div class="col-md-3" > holaU</div>
             </div><!--FIN MENU ARRIBA-->
             
             
@@ -45,11 +45,11 @@ and open the template in the editor.
                             <tbody>
                                 <tr>
                                     <td>Nombre de usuario</td>
-                                    <td> <input type="text"  name="nombreUsuario" placeholder="pepito" /> </td>
+                                    <td> <input type="text" required="Ingresa tu nick" name="nombreUsuario" placeholder="pepito" /> </td>
                                 </tr>
                                 <tr>
                                     <td>Contraseña</td>
-                                    <td> <input type="password"  name="contrasena"  /></td>
+                                    <td> <input type="password" required="Ingresa tu contraseña"  name="contrasena"  /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -73,7 +73,7 @@ and open the template in the editor.
                             <tbody>
                                 <tr>
                                     <td id="correoElectronico">Correo Electrónico</td>
-                                    <td id="textoCorreoElectronico"><input type="email"  name="correoElectronico" placeholder="alguien@example.com"  /></td>
+                                    <td id="textoCorreoElectronico"><input type="email" required="Ingresa este campo"  name="correoElectronico" placeholder="alguien@example.com"  /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -82,11 +82,11 @@ and open the template in the editor.
                             <tbody>
                                 <tr>
                                     <td>Nombre de usuario</td>
-                                    <td> <input type="text"  name="nombreUsuario" placeholder="pepito" /> </td>
+                                    <td> <input type="text"  required="Ingresa este campo" name="nombreUsuario" placeholder="pepito" /> </td>
                                 </tr>
                                 <tr>
                                     <td>Contraseña</td>
-                                    <td> <input type="password"  name="contrasena"  /></td>
+                                    <td> <input type="password" required="Ingresa este campo" name="contrasena"  /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -94,7 +94,7 @@ and open the template in the editor.
                             <tbody>
                                 <tr>
                                     <td id="confirmarContraseña">Confirmar Contraseña</td>
-                                    <td id="textoConfirmarContraseña"><input type="password" name="confirmarContraseña"  /></td>
+                                    <td id="textoConfirmarContraseña"><input type="password" required="Ingresa este campo" name="confirmarContraseña"  /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -105,11 +105,12 @@ and open the template in the editor.
             </div><!--row-->
         </div><!--Container-->
         <?php
-//		if(isset($_POST['botonEnviarFormularioRegistro'])){
-//			require("registroToGuapo.php");
-//		}
+		if(isset($_REQUEST['botonEnviarFormularioRegistro'])){
+			require("registroToGuapo.php");
+		}
                 
-                if(isset($_POST['botonEnviarFormulario'])){
+                if(isset($_REQUEST['botonEnviarFormulario'])){
+                    
 			require("loginToGuapo.php");
 		}
                 
@@ -123,6 +124,7 @@ and open the template in the editor.
               $('#espacioDer').removeClass('col-md-4').addClass('col-md-6');
               $('#contenedorFormularioRegistro').fadeIn('fast');
           }
+          
 
         </script>
     </body>
