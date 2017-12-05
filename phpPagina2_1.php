@@ -1,6 +1,7 @@
 <?php 
 
 $sql = "SELECT * FROM preguntas";
+session_start();
 function connectDB(){
 
         $server = "localhost";
@@ -34,7 +35,7 @@ function disconnectDB($conexion){
     return $close;
 }
 
-function getArraySQL($sql){
+function creaArray($sql){
     //Creamos la conexión con la función anterior
     $conexion = connectDB();
 
@@ -59,8 +60,13 @@ function getArraySQL($sql){
 
     return $rawdata; //devolvemos el array
 }
-
-        $myArray = getArraySQL($sql);
+//function creaJSON (){
+        $myArray = creaArray($sql); 
         echo json_encode($myArray);
+ //       return $myArray;
+
+//}
+$_SESSION['myArray'] = $myArray;
+$_SESSION['hola'] = 'holakpasa';
 ?>
 

@@ -17,13 +17,26 @@ and open the template in the editor.
         <style>
             body{background-image: url("imagenes/logro_2.jpg"); background-size: cover;} 
         </style>
-        <script src="js/preguntasSelectividad.js" type="text/javascript"></script>
+      <!--  <script src="js/preguntasSelectividad.js" type="text/javascript"></script>-->
         <script src="js/verbos.js" type="text/javascript"></script>
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/jquery.raty.js" type="text/javascript"></script>
     </head> 
     <body>
+        <?php 
+        require ('phpPagina2.php');
+        //session_start();
+        $preguntas = ($_SESSION['preguntasAJS']);
+        $preguntasToString = serialize($preguntas);
+        //print_r($preguntasToString);
+//        $implodeDelLosCojones = implode(",", $preguntas);
+      //  print_r($implodeDelLosCojones);
+        $preguntasFiltradas = htmlspecialchars($preguntasToString);
+        
+        print_r($preguntasFiltradas);
+       //print_r($preguntas);
+        ?>
 
         <div class="container " id="containerTrivial">
             <div class="row">
@@ -54,13 +67,8 @@ and open the template in the editor.
                     
                 </div><!--ESPACIODER-->
             </div><!--row-->
-         
         </div><!--Container-->
 
-                <?php //COMPROBAR SI ESTO ESTA BIEN
-     //   session_start();
-        require ('phpPagina2_1.php');
-        ?>
         <script>
     var numeroAleatorio = ocutaNivelesMuestraPregunta();//¿poner var?
     var preguntasRepetidas = []; 
@@ -68,9 +76,15 @@ and open the template in the editor.
     var numeroFallos = 0;
     $('#contenedorNiveles').hide();
     $('#contenedorPreguntas').hide();
-     colocaBotonesEnEligeNivel();
-     //var preguntas = <?php //echo $_GET['preguntas'];  ?>;
+   // $('#trucoRastrero').hide();
     
+   
+      var preguntas = <?php  echo $preguntasFiltradas; ?>; 
+      colocaBotonesEnEligeNivel();
+    
+    
+    
+
     //creacion de funciones
     function desplazaBotones(id){
         // el que le pase el id funciona pero aun no he especificado ninguna funcion en concreto para nincugno       

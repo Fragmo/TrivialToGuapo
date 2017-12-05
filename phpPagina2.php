@@ -1,4 +1,5 @@
 <?php
+session_start();
          define("host", "localhost");
          define("usuario", "root");
          define("contrasena", "");
@@ -14,6 +15,9 @@
 ?>
 
 <?php
+//function cogePreguntas(){
+    
+
 $cogeArrayPreguntas = "SELECT * FROM preguntas";
 
 $preguntas = $creaConexion->query($cogeArrayPreguntas);
@@ -31,9 +35,16 @@ $preguntas = $creaConexion->query($cogeArrayPreguntas);
         $arrayPreguntas[$i] = $row;
         $i++;
     }
-    echo $arrayPreguntas[100][2];
-//                                  ?preguntas=$arrayPreguntas
-            echo "<script>location.href='Pagina2.php'</script>";
+    
+//    print_r($arrayPreguntas);
         }
+//}
+        ?>
+
+<?PHP
+echo json_encode($arrayPreguntas);
+$_SESSION['preguntasAJS'] = $arrayPreguntas;
+//$_POST['preguntasAJS'] = $arrayPreguntas;
+//echo $_SESSION['preguntasAJS'][1][1];
 ?>
 
