@@ -42,7 +42,7 @@ $preguntas = $creaConexion->query($cogeArrayPreguntas);
         ?>
 
 <?PHP
-echo json_encode($arrayPreguntas);
+//echo json_encode($arrayPreguntas);
 $_SESSION['preguntasAJS'] = $arrayPreguntas;
 //$_POST['preguntasAJS'] = $arrayPreguntas;
 //echo $_SESSION['preguntasAJS'][1][1];

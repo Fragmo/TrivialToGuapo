@@ -29,13 +29,14 @@ and open the template in the editor.
         //session_start();
         $preguntas = ($_SESSION['preguntasAJS']);
         $preguntasToString = serialize($preguntas);
+        $preguntasConBarras = addslashes($preguntasToString);
         //print_r($preguntasToString);
 //        $implodeDelLosCojones = implode(",", $preguntas);
       //  print_r($implodeDelLosCojones);
         $preguntasFiltradas = htmlspecialchars($preguntasToString);
-        
-        print_r($preguntasFiltradas);
-       //print_r($preguntas);
+       // print_r("dddd" . $preguntasToString . "aaaa");
+//        print_r($preguntasFiltradas);
+//       print_r($preguntas);
         ?>
 
         <div class="container " id="containerTrivial">
@@ -79,7 +80,7 @@ and open the template in the editor.
    // $('#trucoRastrero').hide();
     
    
-      var preguntas = <?php  echo $preguntasFiltradas; ?>; 
+      var preguntas = <?php  echo $preguntasConBarras; ?>
       colocaBotonesEnEligeNivel();
     
     
