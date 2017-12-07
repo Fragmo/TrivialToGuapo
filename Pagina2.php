@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
 <html>
     <head>
         <title>Trivial</title>
@@ -17,26 +19,19 @@ and open the template in the editor.
         <style>
             body{background-image: url("imagenes/logro_2.jpg"); background-size: cover;} 
         </style>
-      <!--  <script src="js/preguntasSelectividad.js" type="text/javascript"></script>-->
-        <script src="js/verbos.js" type="text/javascript"></script>
+        
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/jquery.raty.js" type="text/javascript"></script>
+      <!--  <script src="js/preguntasSelectividad.js" type="text/javascript"></script>-->
     </head> 
     <body>
         <?php 
-        require ('phpPagina2.php');
-        //session_start();
-        $preguntas = ($_SESSION['preguntasAJS']);
-        $preguntasToString = serialize($preguntas);
-        $preguntasConBarras = addslashes($preguntasToString);
-        //print_r($preguntasToString);
-//        $implodeDelLosCojones = implode(",", $preguntas);
-      //  print_r($implodeDelLosCojones);
-        $preguntasFiltradas = htmlspecialchars($preguntasToString);
-       // print_r("dddd" . $preguntasToString . "aaaa");
-//        print_r($preguntasFiltradas);
-//       print_r($preguntas);
+//        require ('phpPagina2.php');
+//        //session_start();
+//        $preguntas = ($_SESSION['preguntasAJS']);
+
+        
         ?>
 
         <div class="container " id="containerTrivial">
@@ -79,10 +74,10 @@ and open the template in the editor.
     $('#contenedorPreguntas').hide();
    // $('#trucoRastrero').hide();
     
-   
-      var preguntas = <?php  echo $preguntasConBarras; ?>
-      colocaBotonesEnEligeNivel();
-    
+    var preguntas = ;
+    $('#'+ preguntas).load('phpPagina2.php');  
+ 
+       
     
     
 
@@ -141,7 +136,7 @@ and open the template in the editor.
     }
     function ocutaNivelesMuestraPregunta(){//poner id en el pasador de parametros??
                 
-                numeroRepetido();
+               numeroRepetido();
                 
                  //ajusto las preguntas al resto de la pantalla y elimino los niveles para mayor visibilidad                
                 $('#contenedorNiveles').hide();

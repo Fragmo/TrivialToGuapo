@@ -9,6 +9,7 @@ session_start();
 
 <?php
         $creaConexion = new mysqli(host, usuario, contrasena, bbdd);
+        $codificacion = $creaConexion ->query("SET NAMES 'utf8'");
         if($creaConexion->errno >0){
             die("No ha sido posible conectarse a la base de datos [". $creaConexion->connect_error. "]");
         }
@@ -27,24 +28,31 @@ $preguntas = $creaConexion->query($cogeArrayPreguntas);
         }
         
         else{
-             $arrayPreguntas = array(); //creamos un array
-             $i=0;
 
-    while($row = mysqli_fetch_array($preguntas)){
-    
-        $arrayPreguntas[$i] = $row;
-        $i++;
-    }
-    
-//    print_r($arrayPreguntas);
-        }
-//}
+                $preguntasAArray = mysqli_fetch_all($preguntas);
+//                $preguntasToString = serialize($preguntasAArray); 
+//                $preguntasEscapadas = mysqli_real_escape_string($creaConexion,$preguntasToString);
+//                $preguntasLashes =  addslashes($preguntasEscapadas);
+//                print_r($preguntasLashes);
+                
+                
+                       // print_r($preguntas);
+      //  $preguntasToString = serialize($preguntas);
+       // $preguntasConBarras = addslashes($preguntasToString);
+        //print_r($preguntasConBarras);
+//        $implodeDelLosCojones = implode(",", $preguntas);
+      //  print_r($implodeDelLosCojones);
+        //$preguntasFiltradas = htmlspecialchars($preguntasToString);
+       // print_r("dddd" . $preguntasToString . "aaaa");
+        //print_r($preguntasFiltradas);
+//       print_r($preguntas);
+            }
+            $jsonPreguntas = json_encode($preguntasAArray);
+            print_r($jsonPreguntas);
         ?>
 
 <?PHP
-//echo json_encode($arrayPreguntas);
-$_SESSION['preguntasAJS'] = $arrayPreguntas;
-//$_POST['preguntasAJS'] = $arrayPreguntas;
-//echo $_SESSION['preguntasAJS'][1][1];
+$_SESSION['preguntasAJS'] = $preguntasAArray;
+
 ?>
 
