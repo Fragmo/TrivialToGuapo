@@ -23,7 +23,7 @@ and open the template in the editor.
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/jquery.raty.js" type="text/javascript"></script>
-      <!--  <script src="js/preguntasSelectividad.js" type="text/javascript"></script>-->
+        <script src="js/preguntasSelectividad.js" type="text/javascript"></script>
     </head> 
     <body>
         <?php 
@@ -45,11 +45,11 @@ and open the template in the editor.
                 <div class="col-md-3" id="espacioIz"> </div>
                 <div class="col-md-6" > <!----------->
                     <h3 class="text-center"><b id="negritaTemas">Elige un tema!</b></h3>
-                    <input  type="button" value="Historia" id="botonHistoria" class="btn btn-success btn-block" name="botonHistoria" onclick="desplazaBotones(this.id)" />
-                    <input type="button" value="Economia" id="botonEconomia" class="btn btn-warning btn-block"name="botonEconomia" onclick="desplazaBotones(this.id)" />
-                    <input type="button" value="Filosofía" id="botonFilosofia" class="btn btn-primary btn-block"  name="botonFilosofia" onclick="desplazaBotones(this.id)"/>
-                    <input type="button" value="Lengua" id="botonLengua" class="btn btn-info btn-block" name="botonLengua" onclick="desplazaBotones(this.id)"/>
-                    <input type="button" value="Inglés" id="botonIngles" class="btn btn-danger btn-block" name="botonIngles" onclick="desplazaBotones(this.id)"/>
+                    <input  type="button" value="Historia" id="Historia" class="btn btn-success btn-block" name="botonHistoria" onclick="desplazaBotones(this.id)" />
+                    <input type="button" value="Economia" id="Economia" class="btn btn-warning btn-block"name="botonEconomia" onclick="desplazaBotones(this.id)" />
+                    <input type="button" value="Filosofía" id="Filosofia" class="btn btn-primary btn-block"  name="botonFilosofia" onclick="desplazaBotones(this.id)"/>
+                    <input type="button" value="Lengua" id="Lengua" class="btn btn-info btn-block" name="botonLengua" onclick="desplazaBotones(this.id)"/>
+                    <input type="button" value="Inglés" id="Ingles" class="btn btn-danger btn-block" name="botonIngles" onclick="desplazaBotones(this.id)"/>
                 </div><!--colmd5-->
                 <div class="col-md-3 text-center" id="espacioDer"> <!----------->
                     <div id="contenedorNiveles" class="col-md-3 btn-group " style=" width: 50%; height: 100%;"><!----------->
@@ -74,7 +74,7 @@ and open the template in the editor.
     $('#contenedorPreguntas').hide();
    // $('#trucoRastrero').hide();
     
-    var preguntas = ;
+    var preguntas;
     $('#'+ preguntas).load('phpPagina2.php');  
  
        
@@ -96,7 +96,7 @@ and open the template in the editor.
                 // se le cambia el color porque en el desplazamiento se mueve a una zona mas oscura
                 $('#negritaTemas').css({'color': 'white'});
            
-                
+                colocaBotonesEnEligeNivel();
     }
     
     
@@ -112,7 +112,7 @@ and open the template in the editor.
         numeroFallos;
         //numeroAleatorio = Math.floor(Math.random() * preguntas.length);
        
-        if(numeroPregunta.charAt(numeroPregunta.length-1) === preguntas[numeroAleatorio][5]){
+        if(numeroPregunta.charAt(numeroPregunta.length-1) === preguntas[numeroAleatorio][8]){
             preguntasRepetidas.push(numeroAleatorio); 
             if(numeroFallos === 0){
                puntuacion += 10; 
@@ -147,9 +147,9 @@ and open the template in the editor.
                 $('#contenedorPreguntas').append('<h3 class="text-center"><b>Puntuación:'+ puntuacion +'</b></h3>');
                 for(var i = 0; i<5; i++){
                     if(i === 0){
-                        $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ preguntas[numeroAleatorio][0] +'" style="margin-top: 11px;"></button> ');
+                        $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ preguntas[numeroAleatorio][3] +'" style="margin-top: 11px;"></button> ');
                     }else{
-                        $('#contenedorPreguntas').append('<input type="button" id="respuesta'+i+'" class="btn btn-warning btn-block" value="'+ preguntas[numeroAleatorio][i] +'" onclick="comprobarRespuesta(this.id)"> </button> ');
+                        $('#contenedorPreguntas').append('<input type="button" id="respuesta'+i+'" class="btn btn-warning btn-block" value="'+ preguntas[numeroAleatorio][3+i] +'" onclick="comprobarRespuesta(this.id)"> </button> ');
 
                     }
         }
@@ -157,6 +157,7 @@ and open the template in the editor.
     }
     
     function numeroRepetido() {
+    
     numeroAleatorio = Math.floor(Math.random() * preguntas.length);
         if(preguntasRepetidas > 0){
             for(var i = 0; i<preguntasRepetidas.length; i ++){

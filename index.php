@@ -26,13 +26,13 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container " id="containerRegistro" >
-            
+            <header>
             <div class="row"> <!--MENU ARRIBA-->
                 <div class="col-md-3" ></div>
                 <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">TRIVIAL TO GUAPO!</h1></div>
                 <div class="col-md-3" > holaU</div>
             </div><!--FIN MENU ARRIBA-->
-            
+            </header>
             
             <div  class="row" style="margin-top: 15%; "><!--CUERPO NORMAL-->
                 <div class="col-md-4" id="espacioIz"> </div>

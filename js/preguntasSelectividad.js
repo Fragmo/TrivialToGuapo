@@ -1,4 +1,11 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 var preguntas = [
+    //(`numero`, `nivel`, `tema`, `enunciado`, `r1`, `r2`, `r3`, `r4`, `correcta`)
 ["2053", "0", "Economia", "El oligopolio colusivo:", "Actúa de manera similar a un monopolista.", "Tiene una empresa líder que toma decisiones sin tener en cuenta a los demás.", "Las empresas que lo componen bajan el precio cuando una de ellas lo hace también.", "Ninguna empresa toma en cuenta lo que hacen las de la competencia para tomar sus decisiones.", "1"],
 ["2052", "0", "Economia", "Las empresas de un mercado de competencia monopolística:", "Se encuentran con muchas barreras de entrada y de salida.", "Producen un bien que no está claramente diferenciado.", "A largo plazo se situaran en un lugar en el que conseguirán beneficios extraordinarios.", "Son muy numerosas.", "4"],
 ["2051", "0", "Economia", "La siguiente expresión: “Una empresa puede estar en equilibrio aunque tenga pérdidas”, es:", "Sólo se puede estar en equilibrio cuando se tienen beneficios.", "Verdadera.", "Falsa.", "Estará en desequilibrio hasta que gane dinero.", "2"],
@@ -536,3 +543,5 @@ var preguntas = [
 ["5091", "0", "Ingles", "Let me just add ______ the number of correct responses.", "on", "up", "over", "in", "2"],
 ["5092", "0", "Ingles", "She couldn’t sell her old furniture, so she just gave it ______.", "over", "off", "up", "away", "4"],
 ];
+
+
