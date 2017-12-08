@@ -70,6 +70,7 @@ and open the template in the editor.
     var preguntasRepetidas = []; 
     var puntuacion = 0;
     var numeroFallos = 0;
+    var contador =0;
     $('#contenedorNiveles').hide();
     $('#contenedorPreguntas').hide();
    // $('#trucoRastrero').hide();
@@ -101,11 +102,15 @@ and open the template in the editor.
     
     
     function colocaBotonesEnEligeNivel (){
+        
+        if(contador <1 ){
         for(var i = 1; i<10; i++){
             $('#contenedorNiveles').append('<button id="nivel'+i+'" class="btn btn-info" style="margin-left: 3px; margin-top: 3px;" onclick="ocutaNivelesMuestraPregunta()"> Nivel '+ i + ' </button> ');
         }
+        contador++;
+      }
+      return contador;
     }
-    
     function comprobarRespuesta( id){
         // este método comprueba la pregunta y pasa a la siguiente en caso de que la respuesta sea correcta
        var numeroPregunta = id; 
