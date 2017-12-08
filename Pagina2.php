@@ -66,26 +66,28 @@ and open the template in the editor.
         </div><!--Container-->
 
         <script>
-    var numeroAleatorio = ocutaNivelesMuestraPregunta();//¿poner var?
     var preguntasRepetidas = []; 
+    var PreguntasTema = [];
     var puntuacion = 0;
     var numeroFallos = 0;
     var contador =0;
+    var tema = "";
     $('#contenedorNiveles').hide();
     $('#contenedorPreguntas').hide();
-   // $('#trucoRastrero').hide();
     
-    var preguntas;
-    $('#'+ preguntas).load('phpPagina2.php');  
- 
+//    var preguntas; ESTO FUNCIONA PERO NOSE COMO RELACIONAR PHP Y JAVASCRIPT
+//    $('#'+ preguntas).load('phpPagina2.php');  
+      
+      var preguntas;
        
     
     
 
     //creacion de funciones
     function desplazaBotones(id){
-        // el que le pase el id funciona pero aun no he especificado ninguna funcion en concreto para nincugno       
-               
+        // igualo el tema para returnarlo desde el primer momento y tenerlo almacenado       
+               tema = id;
+
                 
                 $('#espacioIz').hide();
                 $('#containerTrivial').css({ 'float': 'left', 'margin-left' : '30px'});
@@ -98,6 +100,8 @@ and open the template in the editor.
                 $('#negritaTemas').css({'color': 'white'});
            
                 colocaBotonesEnEligeNivel();
+                
+        return tema;
     }
     
     
@@ -105,26 +109,31 @@ and open the template in the editor.
         
         if(contador <1 ){
         for(var i = 1; i<10; i++){
-            $('#contenedorNiveles').append('<button id="nivel'+i+'" class="btn btn-info" style="margin-left: 3px; margin-top: 3px;" onclick="ocutaNivelesMuestraPregunta()"> Nivel '+ i + ' </button> ');
+            if(i <=1){
+               $('#contenedorNiveles').append('<button id="nivel'+i+'" class="btn btn-info" style="margin-left: 3px; margin-top: 3px;" onclick="ocutaNivelesMuestraPregunta()"> Nivel '+ i + ' </button> '); 
+            }else{
+                $('#contenedorNiveles').append('<button id="nivel'+i+'"   class="btn btn-info disabled  " style="margin-left: 3px; margin-top: 3px;"> Nivel <i class="fa fa-lock" aria-hidden="true"></i> </button> ');
+            }
+            
         }
         contador++;
       }
+      poneBienTema();
       return contador;
     }
     function comprobarRespuesta( id){
         // este método comprueba la pregunta y pasa a la siguiente en caso de que la respuesta sea correcta
        var numeroPregunta = id; 
-        numeroFallos;
-        //numeroAleatorio = Math.floor(Math.random() * preguntas.length);
-       
+
         if(numeroPregunta.charAt(numeroPregunta.length-1) === preguntas[numeroAleatorio][8]){
             preguntasRepetidas.push(numeroAleatorio); 
             if(numeroFallos === 0){
                puntuacion += 10; 
             }
-            
+            //$('#respuesta1,#respuesta2,#respuesta3,#respuesta4').removeAttr('onclick');
             $('#'+id+'').removeClass('btn-warning').addClass('btn-success');
             $('#'+id+'').fadeOut('slow');//efecto to guapo para decir que has acertado
+            numeroFallos = 0;
             $('#'+id+'').fadeIn('slow', function (){
                                         $('#contenedorPreguntas').text('').unbind();
                                         // para que no se bugge
@@ -134,15 +143,19 @@ and open the template in the editor.
         }else{
             numeroFallos++;
             $('#'+id+'').removeClass('btn-warning').addClass('btn-danger');
+            if(numeroFallos === 0){
             puntuacion -= 10;
-            $('#respuesta'+preguntas[numeroAleatorio][5] +'').removeClass('btn-warning').addClass('btn-success');
         }
-        return numeroAleatorio;
+            $('#respuesta'+preguntas[numeroAleatorio][8] +'').removeClass('btn-warning').addClass('btn-success');
+            
+        }
+
     }
-    function ocutaNivelesMuestraPregunta(){//poner id en el pasador de parametros??
+    function ocutaNivelesMuestraPregunta(){//poner id en el pasador de parametros??              
+//               numeroRepetido();
+
                 
-               numeroRepetido();
-                
+                numeroAleatorio = Math.floor(Math.random() * PreguntasTema.length);
                  //ajusto las preguntas al resto de la pantalla y elimino los niveles para mayor visibilidad                
                 $('#contenedorNiveles').hide();
         
@@ -152,26 +165,45 @@ and open the template in the editor.
                 $('#contenedorPreguntas').append('<h3 class="text-center"><b>Puntuación:'+ puntuacion +'</b></h3>');
                 for(var i = 0; i<5; i++){
                     if(i === 0){
-                        $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ preguntas[numeroAleatorio][3] +'" style="margin-top: 11px;"></button> ');
+                        $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ PreguntasTema[numeroAleatorio][3] +'" style="margin-top: 11px;"></button> ');
                     }else{
-                        $('#contenedorPreguntas').append('<input type="button" id="respuesta'+i+'" class="btn btn-warning btn-block" value="'+ preguntas[numeroAleatorio][3+i] +'" onclick="comprobarRespuesta(this.id)"> </button> ');
+                        $('#contenedorPreguntas').append('<input type="button" id="respuesta'+i+'" class="btn btn-warning btn-block" value="'+ PreguntasTema[numeroAleatorio][3+i] +'" onclick="comprobarRespuesta(this.id)"> </button> ');
 
                     }
         }
-        return numeroAleatorio;
+        //return numeroAleatorio;
     }
     
-    function numeroRepetido() {
     
-    numeroAleatorio = Math.floor(Math.random() * preguntas.length);
-        if(preguntasRepetidas > 0){
-            for(var i = 0; i<preguntasRepetidas.length; i ++){
-                if(numeroAleatorio === preguntasRepetidas[i]){
-                        numeroRepetido();
-                }
-            }   
-    }    
-}
+    
+    function poneBienTema (){
+    
+            var posicion = 0;
+        
+        // mete en el array preguntas las preguntas correctas
+        for (var i=0; i<preguntas.length; i++){
+            if(preguntas[i][2] === tema){
+                
+                PreguntasTema[posicion] = preguntas[i];
+                posicion++;
+                
+            }    
+        }
+        
+        return PreguntasTema;
+        
+    }
+    
+//    function numeroRepetido() {
+//    numeroAleatorio = Math.floor(Math.random() * preguntas.length);
+//        if(preguntasRepetidas > 0){
+//            for(var i = 0; i<preguntasRepetidas.length; i ++){
+//                if(numeroAleatorio === preguntasRepetidas[i]){
+//                        numeroRepetido();
+//                }
+//            }   
+//    }    
+//}
         </script>
     </body>
 </html>
