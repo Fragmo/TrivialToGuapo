@@ -100,30 +100,32 @@ and open the template in the editor.
                 $('#contenedorPreguntas').text('').unbind();
                 // se le cambia el color porque en el desplazamiento se mueve a una zona mas oscura
                 $('#negritaTemas').css({'color': 'white'});
-           
+                poneBienTema();
+                defineLaPutaVariable();
                 colocaBotonesEnEligeNivel();
                 
         return tema;
     }
     
     function defineLaPutaVariable (){
-        $('#trucoRastrero').load('cargaNiveles.php?tema='+tema+'');  
+        $('#trucoRastrero').load('cargaNiveles.php?tema='+tema+ '&id='+ idCogido);
+        colocaNivel = $('#trucoRastrero').text();
      //window.location.href ='cargaNiveles.php?tema='+tema+'';
       //  document.write(colocaNivel);
-      colocaNivel = $('#trucoRastrero').text();
+      //colocaNivel = $('#trucoRastrero').text();
       console.log(colocaNivel);
         return colocaNivel;
     }
     function colocaBotonesEnEligeNivel (){
         $('#contenedorNiveles').text('').append('<h3 style="margin-top:70px;"><b>Selecciona un nivel;)</b></h3>');
        
-       poneBienTema();
-       defineLaPutaVariable();
+       
+       
        console.log(tema);
         //$('#'+ colocaNivel).load('cargaNiveles.php?tema='+tema+'');  
        console.log(colocaNivel);
         
-        for(var i = 0; i<9; i++){
+        for(var i = 0; i<10; i++){
             if(i <= colocaNivel ){
                $('#contenedorNiveles').append('<button id="nivel'+i+'" class="btn btn-info" style="margin-left: 3px; margin-top: 3px;" onclick="ocutaNivelesMuestraPregunta()"> Nivel '+ (i+1) + ' </button> '); 
             }

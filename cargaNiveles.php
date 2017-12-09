@@ -17,7 +17,8 @@ session_start();
 
 <?php
 $tema = $_GET['tema'];
-$consultaNiveles = "SELECT COUNT(*) FROM nivelespasados where $tema = '$tema'";
+$idCliente = $_GET['id'];
+$consultaNiveles = "SELECT COUNT(*) FROM nivelespasados where $tema = '$tema' and idCliente = $idCliente";
 $ejecutaNiveles = $creaConexion->query($consultaNiveles);
 $arrayNiveles = mysqli_fetch_all($ejecutaNiveles);
 $totalNivelesPasados = $arrayNiveles[0][0];
