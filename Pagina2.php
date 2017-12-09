@@ -1,4 +1,4 @@
-
+<?php         session_start(); ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -26,17 +26,19 @@ and open the template in the editor.
         <script src="js/preguntasSelectividad.js" type="text/javascript"></script>
     </head> 
     <body>
-        <?php 
+        <?php
+
 //        require ('phpPagina2.php');
 //        //session_start();
 //        $preguntas = ($_SESSION['preguntasAJS']);
-
+        
+        $idUsuario = $_GET['id'];
         
         ?>
 
         <div class="container " id="containerTrivial">
             <div class="row">
-                <div class="col-md-3" ></div>
+                <div class="col-md-3" id="trucoRastrero" ></div>
                 <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">Trivial To Guapo!</h1></div>
                 <div class="col-md-3" > <button name="botonNombreUsuario" class="btn btn-warning text-center"><b>Hola <?php echo $_GET['usuario']; ?></b></button>  <a href="index.php"><button id="botonSalirSesion" class="btn btn-primary pull-right">Salir</button></a></div>
             </div>
@@ -70,7 +72,6 @@ and open the template in the editor.
     var PreguntasTema = [];
     var puntuacion = 0;
     var numeroFallos = 0;
-    var contador =0;
     var tema = "";
     $('#contenedorNiveles').hide();
     $('#contenedorPreguntas').hide();
@@ -79,7 +80,8 @@ and open the template in the editor.
 //    $('#'+ preguntas).load('phpPagina2.php');  
       
       var preguntas;
-       
+      var idCogido = '<?php echo $idUsuario ?>';
+      var colocaNivel = 0;
     
     
 
@@ -104,29 +106,44 @@ and open the template in the editor.
         return tema;
     }
     
-    
+    function defineLaPutaVariable (){
+        $('#trucoRastrero').load('cargaNiveles.php?tema='+tema+'');  
+     //window.location.href ='cargaNiveles.php?tema='+tema+'';
+      //  document.write(colocaNivel);
+      colocaNivel = $('#trucoRastrero').text();
+      console.log(colocaNivel);
+        return colocaNivel;
+    }
     function colocaBotonesEnEligeNivel (){
+        $('#contenedorNiveles').text('').append('<h3 style="margin-top:70px;"><b>Selecciona un nivel;)</b></h3>');
+       
+       poneBienTema();
+       defineLaPutaVariable();
+       console.log(tema);
+        //$('#'+ colocaNivel).load('cargaNiveles.php?tema='+tema+'');  
+       console.log(colocaNivel);
         
-        if(contador <1 ){
-        for(var i = 1; i<10; i++){
-            if(i <=1){
-               $('#contenedorNiveles').append('<button id="nivel'+i+'" class="btn btn-info" style="margin-left: 3px; margin-top: 3px;" onclick="ocutaNivelesMuestraPregunta()"> Nivel '+ i + ' </button> '); 
-            }else{
+        for(var i = 0; i<9; i++){
+            if(i <= colocaNivel ){
+               $('#contenedorNiveles').append('<button id="nivel'+i+'" class="btn btn-info" style="margin-left: 3px; margin-top: 3px;" onclick="ocutaNivelesMuestraPregunta()"> Nivel '+ (i+1) + ' </button> '); 
+            }
+            if(i > colocaNivel && i <10){
                 $('#contenedorNiveles').append('<button id="nivel'+i+'"   class="btn btn-info disabled  " style="margin-left: 3px; margin-top: 3px;"> Nivel <i class="fa fa-lock" aria-hidden="true"></i> </button> ');
             }
             
         }
-        contador++;
-      }
-      poneBienTema();
-      return contador;
+
+
+      
+     return colocaNivel;
     }
     function comprobarRespuesta( id){
         // este método comprueba la pregunta y pasa a la siguiente en caso de que la respuesta sea correcta
        var numeroPregunta = id; 
-
+       console.log(numeroAleatorio);
+       console.log(PreguntasTema[numeroAleatorio][8]);
         if(numeroPregunta.charAt(numeroPregunta.length-1) === preguntas[numeroAleatorio][8]){
-            preguntasRepetidas.push(numeroAleatorio); 
+            //preguntasRepetidas.push(numeroAleatorio); 
             if(numeroFallos === 0){
                puntuacion += 10; 
             }
@@ -134,6 +151,7 @@ and open the template in the editor.
             $('#'+id+'').removeClass('btn-warning').addClass('btn-success');
             $('#'+id+'').fadeOut('slow');//efecto to guapo para decir que has acertado
             numeroFallos = 0;
+            //document.write(numeroPregunta.charAt(numeroPregunta.length-1) + 'hola' + preguntas[numeroAleatorio][8]);
             $('#'+id+'').fadeIn('slow', function (){
                                         $('#contenedorPreguntas').text('').unbind();
                                         // para que no se bugge
@@ -143,13 +161,21 @@ and open the template in the editor.
         }else{
             numeroFallos++;
             $('#'+id+'').removeClass('btn-warning').addClass('btn-danger');
-            if(numeroFallos === 0){
+            if(numeroFallos === 1){
             puntuacion -= 10;
         }
             $('#respuesta'+preguntas[numeroAleatorio][8] +'').removeClass('btn-warning').addClass('btn-success');
             
         }
-
+        
+        if(puntuacion === 10 || puntuacion === -10){
+           pasasteDeNivel();
+        }
+    }
+    
+    function pasasteDeNivel (){
+    window.location.href = "actualizaNiveles.php?tema="+ tema+ "&id="+ idCogido ;
+    
     }
     function ocutaNivelesMuestraPregunta(){//poner id en el pasador de parametros??              
 //               numeroRepetido();
@@ -165,7 +191,7 @@ and open the template in the editor.
                 $('#contenedorPreguntas').append('<h3 class="text-center"><b>Puntuación:'+ puntuacion +'</b></h3>');
                 for(var i = 0; i<5; i++){
                     if(i === 0){
-                        $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ PreguntasTema[numeroAleatorio][3] +'" style="margin-top: 11px;"></button> ');
+                        $('#contenedorPreguntas').append('<input type="button" id="Pregunta" class="btn btn-info btn-block" value="'+ PreguntasTema[numeroAleatorio][3] +' ' + preguntas[numeroAleatorio][8] +'" style="margin-top: 11px;"></button> ');
                     }else{
                         $('#contenedorPreguntas').append('<input type="button" id="respuesta'+i+'" class="btn btn-warning btn-block" value="'+ PreguntasTema[numeroAleatorio][3+i] +'" onclick="comprobarRespuesta(this.id)"> </button> ');
 

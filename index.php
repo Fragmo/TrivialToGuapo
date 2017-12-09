@@ -19,7 +19,6 @@ and open the template in the editor.
       
             
         </style>
-        <script src="js/verbos.js" type="text/javascript"></script>
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/jquery.raty.js" type="text/javascript"></script>
