@@ -40,18 +40,18 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-3" id="trucoRastrero" ></div>
                 <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">Trivial To Guapo!</h1></div>
-                <div class="col-md-3" > <button name="botonNombreUsuario" class="btn btn-warning text-center"><b>Hola <?php echo $_GET['usuario']; ?></b></button>  <a href="index.php"><button id="botonSalirSesion" class="btn btn-primary pull-right">Salir</button></a></div>
+                <div class="col-md-3" > <button name="botonNombreUsuario" class="btn btn-warning text-center"><b>Hola <?php echo $_GET['usuario']; ?> <i class="fa fa-hand-peace-o" aria-hidden="true"></i></b></button>  <a href="index.php"><button id="botonSalirSesion" class="btn btn-primary pull-right"> <i class="fa fa-sign-out" aria-hidden="true"></i>Salir</button></a></div>
             </div>
             
             <div class="row" style="margin-top: 10%;"> <!-- TIENE EL CONTENIDO BUENO CON LAS PREGUNTAS ETC-->
                 <div class="col-md-3" id="espacioIz"> </div>
                 <div class="col-md-6" > <!----------->
                     <h3 class="text-center"><b id="negritaTemas">Elige un tema!</b></h3>
-                    <input  type="button" value="Historia" id="Historia" class="btn btn-success btn-block" name="botonHistoria" onclick="desplazaBotones(this.id)" />
-                    <input type="button" value="Economia" id="Economia" class="btn btn-warning btn-block"name="botonEconomia" onclick="desplazaBotones(this.id)" />
-                    <input type="button" value="Filosofía" id="Filosofia" class="btn btn-primary btn-block"  name="botonFilosofia" onclick="desplazaBotones(this.id)"/>
-                    <input type="button" value="Lengua" id="Lengua" class="btn btn-info btn-block" name="botonLengua" onclick="desplazaBotones(this.id)"/>
-                    <input type="button" value="Inglés" id="Ingles" class="btn btn-danger btn-block" name="botonIngles" onclick="desplazaBotones(this.id)"/>
+                    <button  id="Historia" class="btn btn-success btn-block" name="botonHistoria" onclick="desplazaBotones(this.id)">Historia <i class="fa fa-header" aria-hidden="true"></i></button>
+                    <button  id="Economia" class="btn btn-warning btn-block"name="botonEconomia" onclick="desplazaBotones(this.id)" >Economia <i class="fa fa-money" aria-hidden="true"></i></button>
+                    <button  id="Filosofia" class="btn btn-primary btn-block"  name="botonFilosofia" onclick="desplazaBotones(this.id)">Filosofía <i class="fa fa-cloud" aria-hidden="true"></i></button>
+                    <button  id="Lengua" class="btn btn-info btn-block" name="botonLengua" onclick="desplazaBotones(this.id)">Lengua <i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button  id="Ingles" class="btn btn-danger btn-block" name="botonIngles" onclick="desplazaBotones(this.id)">Inglés <i class="fa fa-flag" aria-hidden="true"></i></button>
                 </div><!--colmd5-->
                 <div class="col-md-3 text-center" id="espacioDer"> <!----------->
                     <div id="contenedorNiveles" class="col-md-3 btn-group " style=" width: 50%; height: 100%;"><!----------->
@@ -74,7 +74,9 @@ and open the template in the editor.
     var numeroFallos = 0;
     var tema = "";
     $('#contenedorNiveles').hide();
-    $('#contenedorPreguntas').hide();
+    $('#contenedorPreguntas').hide(function (){
+       // alert('debes dar doble click a cada tema para que se actualicen los niveles correctamente');
+    });
     
 //    var preguntas; ESTO FUNCIONA PERO NOSE COMO RELACIONAR PHP Y JAVASCRIPT
 //    $('#'+ preguntas).load('phpPagina2.php');  
@@ -106,17 +108,21 @@ and open the template in the editor.
                 
         return tema;
     }
-    
-    function defineLaPutaVariable (){
-        $('#trucoRastrero').load('cargaNiveles.php?tema='+tema+ '&id='+ idCogido);
-        colocaNivel = $('#trucoRastrero').text();
+
+    function defineLaPutaVariable (){ // define y carga la variable de cuantos 
+        //                              niveles tiene disponible de cada tema el usuario
+        $('#trucoRastrero').load('cargaNiveles.php?tema='+tema+ '&id='+ idCogido, function (){
+         colocaNivel = $('#trucoRastrero').text();   
+        });
+        
+        
      //window.location.href ='cargaNiveles.php?tema='+tema+'';
       //  document.write(colocaNivel);
       //colocaNivel = $('#trucoRastrero').text();
       console.log(colocaNivel);
         return colocaNivel;
     }
-    function colocaBotonesEnEligeNivel (){
+    function colocaBotonesEnEligeNivel (){ // coloca los niveles a seleccionar
         $('#contenedorNiveles').text('').append('<h3 style="margin-top:70px;"><b>Selecciona un nivel;)</b></h3>');
        
        
@@ -139,7 +145,7 @@ and open the template in the editor.
       
      return colocaNivel;
     }
-    function comprobarRespuesta( id){
+    function comprobarRespuesta( id){ 
         // este método comprueba la pregunta y pasa a la siguiente en caso de que la respuesta sea correcta
        var numeroPregunta = id; 
        console.log(numeroAleatorio);
@@ -170,7 +176,8 @@ and open the template in the editor.
             
         }
         
-        if(puntuacion === 10 || puntuacion === -10){
+        if(puntuacion === 100){
+            alert("Has pasado de nivel, hicia sesion otra vez para seguir jugando");
            pasasteDeNivel();
         }
     }
