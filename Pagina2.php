@@ -33,6 +33,8 @@ and open the template in the editor.
 //        $preguntas = ($_SESSION['preguntasAJS']);
         
         $idUsuario = $_GET['id'];
+        $contrasenaPasada = $_GET['contrasenaBuena'];
+        $nombreUsuarioDeLosCojones = $_GET['usuario'];
         
         ?>
 
@@ -80,9 +82,10 @@ and open the template in the editor.
     
 //    var preguntas; ESTO FUNCIONA PERO NOSE COMO RELACIONAR PHP Y JAVASCRIPT
 //    $('#'+ preguntas).load('phpPagina2.php');  
-      
-      var preguntas;
       var idCogido = '<?php echo $idUsuario ?>';
+      var UsuarioNoSison = '<?php echo $nombreUsuarioDeLosCojones?>';
+      var contrasena = '<?php echo $contrasenaPasada?>';
+      var preguntas;
       var colocaNivel = 0;
     
     
@@ -176,13 +179,13 @@ and open the template in the editor.
         }
         
         if(puntuacion === 100){
-            alert("Has pasado de nivel, hicia sesion otra vez para seguir jugando");
+           alert("Has pasado de nivel!!!");
            pasasteDeNivel();
         }
     }
     
     function pasasteDeNivel (){
-    window.location.href = "actualizaNiveles.php?tema="+ tema+ "&id="+ idCogido ;
+    window.location.href = "actualizaNiveles.php?tema="+ tema+ "&id="+ idCogido + "&contrasena=" + contrasena  + "&usuario=" + UsuarioNoSison;
     
     }
     function ocutaNivelesMuestraPregunta(){//poner id en el pasador de parametros??              

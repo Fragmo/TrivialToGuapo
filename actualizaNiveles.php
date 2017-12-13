@@ -17,6 +17,8 @@ session_start();
 
 <?php
 $id = $_GET['id'];
+$usuarioNivel = $_GET['usuario'] ;
+$contrasenaNivel = $_GET['contrasena'];
 $tema = $_GET['tema'];
 $consultaSQL = "INSERT INTO nivelespasados (idCliente, $tema) VALUES ($id,'$tema')"; 
 print_r($consultaSQL);
@@ -24,6 +26,7 @@ $ejecutaConsulta = $creaConexion->query($consultaSQL);
         if($creaConexion->errno >0){
             die("No ha sido posible realizar la consulta [". $creaConexion->connect_error. "]");
         }
-echo "<script>location.href='index.php'</script>";
+       // echo $usuarioNivel.'  '. $contrasenaNivel;
+echo "<script>location.href='loginToGuapo.php?pasasteNivel=true&id=$id&usuario=$usuarioNivel&contrasena=$contrasenaNivel'</script>";
 ?>
 

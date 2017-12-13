@@ -10,7 +10,14 @@ session_start(); // iniciamos sesion
          if($creaConexion->errno >0){
             die("No ha sido posible conectarse a la base de datos [". $creaConexion->connect_error. "]");
          }
-         
+         $pasasteNivel = $_GET['pasasteNivel'];
+         if(isset($pasasteNivel)){
+             $usuariooNivel = $_GET['usuario'];
+             $contrasenaaNivel = $_GET['contrasena'];
+             $idd = $_GET['id'];
+             //echo 'SE HA METIDO POR EL BUENO';
+             echo "<script>location.href='Pagina2.php?usuario=$usuariooNivel&id=$idd&contrasenaBuena=$contrasenaaNivel'</script>";
+         }else{
          $nombreUsuarioLogin = $_POST["nombreUsuario"];
          $contrasenaLogin = $_POST["contrasena"];
 //COMPROBAR SI LA MIERDA DEL SESSION ESTA BIEN
@@ -27,7 +34,10 @@ session_start(); // iniciamos sesion
              if( $contrasenaLogin = mysqli_fetch_assoc($querySeleccionaContrasena)){
                  
                  $id= $arrayCompruebaNombre[0][0];
-                 echo "<script>location.href='Pagina2.php?usuario=$nombreUsuarioLogin&id=$id'</script>";
+                 $contrasenaFinal = $arrayCompruebaNombre[0][3];
+               
+
+                 echo "<script>location.href='Pagina2.php?usuario=$nombreUsuarioLogin&id=$id&contrasenaBuena=$contrasenaFinal'</script>";
                   
              }else{
                   echo ' <script language="javascript">alert("Contraseña incorrecta");</script> ';
@@ -35,6 +45,7 @@ session_start(); // iniciamos sesion
          }else{
              echo ' <script language="javascript">alert("Usuario no registrado");</script> ';
          }
+   }
 ?>
 
 
