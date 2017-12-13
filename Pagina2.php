@@ -7,26 +7,7 @@ and open the template in the editor.
 -->
 
 <html>
-    <head>
-        <title>Trivial</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="js/jquery.raty.css" rel="stylesheet" type="text/css"/>
-        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/propioCss.css" rel="stylesheet" type="text/css"/>
- <!--la url DEL BODY BACKGROUND esta bien pero he puesto la BARRA EN MEDIO PARA QUE NO VAYA Y TRABAJAR MIENTRAS SIN ELLO-->
-        <style>
-            body{background-image: url("imagenes/logro_2.jpg"); background-size: cover;} 
-        </style>
-        
-        <script src="js/jquery.js" type="text/javascript"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="js/jquery.raty.js" type="text/javascript"></script>
-        <script src="js/preguntasSelectividad.js" type="text/javascript"></script>
-    </head> 
-    <body>
-        <?php
+            <?php
 
 //        require ('phpPagina2.php');
 //        //session_start();
@@ -37,7 +18,26 @@ and open the template in the editor.
         $nombreUsuarioDeLosCojones = $_GET['usuario'];
         
         ?>
+    <head>
+        <title>Trivial de <?php echo $nombreUsuarioDeLosCojones;?></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="js/jquery.raty.css" rel="stylesheet" type="text/css"/>
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/propioCss.css" rel="stylesheet" type="text/css"/>
+        <style>
+            body{background-image: url("imagenes/logro_2.jpg"); background-size: cover;} 
+        </style>
+        
+        <script src="js/jquery.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/jquery.raty.js" type="text/javascript"></script>
+        <script src="js/preguntasSelectividad.js" type="text/javascript"></script>
+    </head> 
+    <body>
 
+<!--ALGUNAS VARIABLES DE PHP ESTAN ARRIBA DEL TODO-->
         <div class="container " id="containerTrivial">
             <div class="row">
                 <div class="col-md-3" id="trucoRastrero" ></div>
