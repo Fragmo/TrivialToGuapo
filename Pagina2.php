@@ -28,6 +28,7 @@ and open the template in the editor.
         <link href="css/propioCss.css" rel="stylesheet" type="text/css"/>
         <style>
             body{background-image: url("imagenes/logro_2.jpg"); background-size: cover;} 
+
         </style>
         
         <script src="js/jquery.js" type="text/javascript"></script>
@@ -65,13 +66,23 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-3" style="color: white;">
                     <b><h3>Top Usuarios</h3> 
-                    <p> Top 1: <?php echo $arrayTop[0][0]?> Niveles totales : <?php echo $arrayTop[0][1]?><!-- <a  href="serguidores.php?seguido= <<?php //echo $arrayTop[0][0]?>&seguidor=<?php// echo $nombreUsuarioDeLosCojones?>"><i class="fa fa-check" aria-hidden="true"></i></a>--></p>
-                    <p> Top 2: <?php echo $arrayTop[1][0]?> Niveles totales : <?php echo $arrayTop[1][1]?><!-- <a  href="serguidores.php?seguido=<?php //echo $arrayTop[1][0]?>&seguidor=<?php// echo $nombreUsuarioDeLosCojones?>"><i class="fa fa-check" aria-hidden="true"></i></a>--></p>
-                    <p> Top 3: <?php echo $arrayTop[2][0]?> Niveles totales : <?php echo $arrayTop[2][1]?><!-- <a  href="serguidores.php?seguido=<?php //echo $arrayTop[2][0]?>&seguidor=<?php// echo $nombreUsuarioDeLosCojones?>"><i class="fa fa-check" aria-hidden="true"></i></a>--></p><b>
+                    <p> Top 1: <?php echo $arrayTop[0][0]?> Niveles totales : <?php echo $arrayTop[0][1]?><a  href="serguidores.php?seguido=<?php echo $arrayTop[0][0]?>&seguidor=<?php echo $nombreUsuarioDeLosCojones?>"><i class="fa fa-check" aria-hidden="true"></i></a></p>
+                    <p> Top 2: <?php echo $arrayTop[1][0]?> Niveles totales : <?php echo $arrayTop[1][1]?><a  href="serguidores.php?seguido=<?php echo $arrayTop[1][0]?>&seguidor=<?php echo $nombreUsuarioDeLosCojones?>"><i class="fa fa-check" aria-hidden="true"></i></a></p>
+                    <p> Top 3: <?php echo $arrayTop[2][0]?> Niveles totales : <?php echo $arrayTop[2][1]?><a  href="serguidores.php?seguido=<?php echo $arrayTop[2][0]?>&seguidor=<?php echo $nombreUsuarioDeLosCojones?>"><i class="fa fa-check" aria-hidden="true"></i></a></p><b>
                 </div> 
                 <div class="col-md-9"></div>
             </div>
-            <div class="row" style="margin-top: 3%;" > <!-- TIENE EL CONTENIDO BUENO CON LAS PREGUNTAS ETC-->
+<!--            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-5">
+                    <div id="hola" class="progress">
+                        <div id="bar" class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+                
+            </div>-->
+            <div class="row" style="" > <!-- TIENE EL CONTENIDO BUENO CON LAS PREGUNTAS ETC-->
                 <div class="col-md-3" id="espacioIz"> </div>
                 <div class="col-md-6" id="contenedorTemas" > <!----------->
                     <h3 class="text-center"><b id="negritaTemas">Elige un tema!</b></h3>
@@ -82,6 +93,7 @@ and open the template in the editor.
                     <button  id="Ingles" class="btn btn-danger btn-block" name="botonIngles" onclick="desplazaBotones(this.id)">Inglés <i class="fa fa-flag" aria-hidden="true"></i></button>
                 </div><!--colmd5-->
                 <div class="col-md-3 text-center" id="espacioDer"> <!----------->
+                    
                     <div id="contenedorNiveles" class="col-md-3 btn-group " style=" width: 50%; height: 100%;"><!----------->
                         <h3 style="margin-top:70px;"><b>Selecciona un nivel;)</b></h3>
                         
@@ -102,6 +114,7 @@ and open the template in the editor.
     var numeroFallos = 0;
     var tema = "";
     $('#contenedorNiveles').hide();
+    $('#bar').hide();
     $('#contenedorPreguntas').hide(function (){
        // alert('debes dar doble click a cada tema para que se actualicen los niveles correctamente');
     });
@@ -115,7 +128,23 @@ and open the template in the editor.
       var colocaNivel = 0;
     
     
-
+//var progreso = 0;
+//      var idIterval = setInterval(function(){
+//        // Aumento en 10 el progeso
+//        progreso +=10;
+//        $('#bar').css('width', progreso + '%');
+//       
+//      //Si llegó a 100 elimino el interval
+//        if(progreso == 100){
+//       
+//              comprobarRespuesta();
+//       clearInterval(idIterval);
+//      }
+//      },2000);
+      
+      
+      
+      
     //creacion de funciones
     function desplazaBotones(id){
         // igualo el tema para returnarlo desde el primer momento y tenerlo almacenado       
@@ -224,7 +253,7 @@ and open the template in the editor.
                 $('#contenedorTemas').removeClass('col-md-6').addClass('col-md-3');
                 $('#espacioDer').removeClass('col-md-6').addClass('col-md-9');
                 $('#contenedorPreguntas').removeClass('col-md-3').addClass('col-md-9').css({ 'width': '100%'}).fadeIn("slow"); 
-                
+                $('#bar').fadeIn('fast');
                 //coloco los botones de las preguntas
                 $('#contenedorPreguntas').append('<h3 class="text-center"><b>Puntuación:'+ puntuacion +'</b></h3>');
                 for(var i = 0; i<5; i++){

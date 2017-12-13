@@ -13,9 +13,6 @@ and open the template in the editor.
 //        //session_start();
 //        $preguntas = ($_SESSION['preguntasAJS']);
         
-        $idUsuario = $_GET['id'];
-        $contrasenaPasada = $_GET['contrasenaBuena'];
-        $nombreUsuarioDeLosCojones = $_GET['usuario'];
         error_reporting(0);
         ?>
     <head>
@@ -41,14 +38,21 @@ and open the template in the editor.
          define("usuario", "root");
          define("contrasena", "");
          define("bbdd", "trivial");
-         
+         $usuarioNom= $_GET['usuario'];
          $creaConexion = new mysqli(host, usuario, contrasena, bbdd);
          if($creaConexion->errno >0){
             die("No ha sido posible conectarse a la base de datos [". $creaConexion->connect_error. "]");
          }
-        $consultaTOPUsuarios = "SELECT usuarios.nombre , COUNT( * ) AS num FROM nivelespasados join usuarios on nivelespasados.idCliente = usuarios.id GROUP BY idCliente ORDER BY num DESC LIMIT 0 , 3";
-        $ejecutaConsultaTOP = mysqli_query($creaConexion, $consultaTOPUsuarios);
-        $arrayTop = mysqli_fetch_all($ejecutaConsultaTOP);
+         // PARA VER LOS QUE LE SIGUEN A ESTE USUARIO (HASTA AHORA SOLO TENGO EL NUMERO)
+        $consultaseguidores ="select count(usuario) from seguir where usuario ='$usuarioNom' ";
+        $ejecutaSeguidores = mysqli_query($creaConexion, $consultaseguidores);
+        $arraySeguidores = mysqli_fetch_all($ejecutaSeguidores);
+        //PARA VER A CUANTOS SIGUE
+        $consultasiguiendo ="select count(seguidor) from seguir where seguidor ='$usuarioNom' ";
+//        print_r($consultasiguiendo);
+        $ejecutasiguiendo = mysqli_query($creaConexion, $consultasiguiendo);
+        $arraysiguiendo = mysqli_fetch_all($ejecutasiguiendo);
+
         
         
         ?>
@@ -58,11 +62,11 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-3" id="trucoRastrero" ></div>
                 <div class="col-md-6" ><h1 class="text-center cambiaColorTexto"><?php echo $_GET['usuario']; ?></h1></div>
-                <div class="col-md-3" ><a href="index.php"><button id="botonSalirSesion" class="btn btn-primary pull-right"> <i class="fa fa-sign-out" aria-hidden="true"></i>Salir</button></a></div>
+                <div class="col-md-3" >   <a href="index.php"><button id="botonSalirSesion" class="btn btn-primary pull-right"> <i class="fa fa-sign-out" aria-hidden="true"></i>Salir</button></a></div>
             </div>
             <div class="row">
                 <div class="col-md-4"></div>
-                <div class="col-md-4"><button class="btn btn-success" style="width: 50%;">Seguidores:</button><button class="btn btn-success" style="width: 50%;">Siguiendo:</button></div>
+                <div class="col-md-4"><button class="btn btn-success" style="width: 50%;">Seguidores:<?php echo $arraySeguidores[0][0]?></button><button class="btn btn-success" style="width: 50%;">Siguiendo:<?php echo $arraysiguiendo[0][0]?></button></div>
                 <div class="col-md-4"></div>
             </div>
         </div><!--Container-->

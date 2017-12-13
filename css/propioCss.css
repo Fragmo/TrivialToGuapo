@@ -24,6 +24,12 @@ and open the template in the editor.
         100% {color:red;}
 
             }
+            
+            @keyframes animacionBarra {
+        0%   {width:0%;}
+        100% {width: 100%;}
+
+            }
             #divFormulario, #contenedorFormularioRegistro{ animation-name: cambioColorFormulario; animation-duration: 7s; animation-iteration-count: infinite;}
             .cambiaColorTexto{ animation-name: cambioTexto; animation-duration: 7s; animation-iteration-count: infinite;}
-            
+            .animacionBarra{animation-name: animacionBarra; animation-duration: 20s;}
