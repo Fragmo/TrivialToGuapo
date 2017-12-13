@@ -46,6 +46,17 @@ and open the template in the editor.
             die("No ha sido posible conectarse a la base de datos [". $creaConexion->connect_error. "]");
          }
          // PARA VER LOS QUE LE SIGUEN A ESTE USUARIO (HASTA AHORA SOLO TENGO EL NUMERO)
+         //CONSULTA PARA TENER LOS DATOS DEL USUARIO ACTUAL A MANO
+         $consultaDatosUsuario = "select * from usuarios where nombre = '$usuarioNom'";
+         print_r($consultaDatosUsuario);
+         $ejecutaDatosUsuario = mysqli_query($creaConexion, $consultaDatosUsuario);
+         $arrayDatosUsuario = mysqli_fetch_all($ejecutaDatosUsuario);
+         $idUsu = $arrayDatosUsuario[0][0];
+         //EL NOMBRE ESTA ARRIBA
+         $contrasenaUsu = $arrayDatosUsuario[0][3];
+         
+         
+         //CONSULTAS PARA LOS SEGUIDORES Y METODOS DE LA PAGINA
         $consultaseguidores ="select count(usuario) from seguir where usuario ='$usuarioNom' ";
         $ejecutaSeguidores = mysqli_query($creaConexion, $consultaseguidores);
         $arraySeguidores = mysqli_fetch_all($ejecutaSeguidores);
@@ -88,7 +99,7 @@ and open the template in the editor.
         <div class="container " id="containerTrivial">
             <div class="row">
                 <div class="col-md-3" id="trucoRastrero" ></div>
-                <div class="col-md-6" ><h1 class="text-center cambiaColorTexto"><?php echo $_GET['usuario']; ?></h1></div>
+                <div class="col-md-6" ><h1 class="text-center cambiaColorTexto"><a href=<?php echo'pagina2.php?id='.$idUsu.'&usuario='.$usuarioNom.'&contrasenaBuena='.$contrasenaUsu.''?>><?php echo $_GET['usuario']; ?></a></h1></div>
                 <div class="col-md-3" >   <a href="index.php"><button id="botonSalirSesion" class="btn btn-primary pull-right"> <i class="fa fa-sign-out" aria-hidden="true"></i>Salir</button></a></div>
             </div>
             <div class="row">
