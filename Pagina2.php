@@ -43,9 +43,9 @@ and open the template in the editor.
                 <div class="col-md-3" > <button name="botonNombreUsuario" class="btn btn-warning text-center"><b>Hola <?php echo $_GET['usuario']; ?> <i class="fa fa-hand-peace-o" aria-hidden="true"></i></b></button>  <a href="index.php"><button id="botonSalirSesion" class="btn btn-primary pull-right"> <i class="fa fa-sign-out" aria-hidden="true"></i>Salir</button></a></div>
             </div>
             
-            <div class="row" style="margin-top: 10%;"> <!-- TIENE EL CONTENIDO BUENO CON LAS PREGUNTAS ETC-->
+            <div class="row" style="margin-top: 10%;" > <!-- TIENE EL CONTENIDO BUENO CON LAS PREGUNTAS ETC-->
                 <div class="col-md-3" id="espacioIz"> </div>
-                <div class="col-md-6" > <!----------->
+                <div class="col-md-6" id="contenedorTemas" > <!----------->
                     <h3 class="text-center"><b id="negritaTemas">Elige un tema!</b></h3>
                     <button  id="Historia" class="btn btn-success btn-block" name="botonHistoria" onclick="desplazaBotones(this.id)">Historia <i class="fa fa-header" aria-hidden="true"></i></button>
                     <button  id="Economia" class="btn btn-warning btn-block"name="botonEconomia" onclick="desplazaBotones(this.id)" >Economia <i class="fa fa-money" aria-hidden="true"></i></button>
@@ -192,8 +192,9 @@ and open the template in the editor.
                 numeroAleatorio = Math.floor(Math.random() * PreguntasTema.length);
                  //ajusto las preguntas al resto de la pantalla y elimino los niveles para mayor visibilidad                
                 $('#contenedorNiveles').hide();
-        
-                $('#contenedorPreguntas').removeClass('col-md-3').addClass('col-md-6').css({ 'width': '100%'}).fadeIn("slow"); 
+                $('#contenedorTemas').removeClass('col-md-6').addClass('col-md-3');
+                $('#espacioDer').removeClass('col-md-6').addClass('col-md-9');
+                $('#contenedorPreguntas').removeClass('col-md-3').addClass('col-md-9').css({ 'width': '100%'}).fadeIn("slow"); 
                 
                 //coloco los botones de las preguntas
                 $('#contenedorPreguntas').append('<h3 class="text-center"><b>Puntuación:'+ puntuacion +'</b></h3>');
