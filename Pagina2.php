@@ -155,7 +155,6 @@ and open the template in the editor.
             if(numeroFallos === 0){
                puntuacion += 10; 
             }
-            //$('#respuesta1,#respuesta2,#respuesta3,#respuesta4').removeAttr('onclick');
             $('#'+id+'').removeClass('btn-warning').addClass('btn-success');
             $('#'+id+'').fadeOut('slow');//efecto to guapo para decir que has acertado
             numeroFallos = 0;
