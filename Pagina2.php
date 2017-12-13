@@ -16,7 +16,7 @@ and open the template in the editor.
         $idUsuario = $_GET['id'];
         $contrasenaPasada = $_GET['contrasenaBuena'];
         $nombreUsuarioDeLosCojones = $_GET['usuario'];
-        
+        error_reporting(0);
         ?>
     <head>
         <title>Trivial de <?php echo $nombreUsuarioDeLosCojones;?></title>
@@ -36,6 +36,22 @@ and open the template in the editor.
         <script src="js/preguntasSelectividad.js" type="text/javascript"></script>
     </head> 
     <body>
+        <?php
+         define("host", "localhost");
+         define("usuario", "root");
+         define("contrasena", "");
+         define("bbdd", "trivial");
+         
+         $creaConexion = new mysqli(host, usuario, contrasena, bbdd);
+         if($creaConexion->errno >0){
+            die("No ha sido posible conectarse a la base de datos [". $creaConexion->connect_error. "]");
+         }
+        $consultaTOPUsuarios = "SELECT usuarios.nombre , COUNT( * ) AS num FROM nivelespasados join usuarios on nivelespasados.idCliente = usuarios.id GROUP BY idCliente ORDER BY num DESC LIMIT 0 , 3";
+        $ejecutaConsultaTOP = mysqli_query($creaConexion, $consultaTOPUsuarios);
+        $arrayTop = mysqli_fetch_all($ejecutaConsultaTOP);
+        
+        
+        ?>
 
 <!--ALGUNAS VARIABLES DE PHP ESTAN ARRIBA DEL TODO-->
         <div class="container " id="containerTrivial">
@@ -44,7 +60,16 @@ and open the template in the editor.
                 <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">Trivial To Guapo!</h1></div>
                 <div class="col-md-3" > <button name="botonNombreUsuario" class="btn btn-warning text-center"><b>Hola <?php echo $_GET['usuario']; ?> <i class="fa fa-hand-peace-o" aria-hidden="true"></i></b></button>  <a href="index.php"><button id="botonSalirSesion" class="btn btn-primary pull-right"> <i class="fa fa-sign-out" aria-hidden="true"></i>Salir</button></a></div>
             </div>
-            
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-3">
+                    <h3>Top Usuarios</h3> 
+                    <p> Top 1: <?php echo $arrayTop[0][0]?> niveles totales : <?php echo $arrayTop[0][1]?></p>
+                    <p> Top 2: <?php echo $arrayTop[1][0]?> niveles totales : <?php echo $arrayTop[1][1]?></p>
+                    <p> Top 3: <?php echo $arrayTop[2][0]?> niveles totales : <?php echo $arrayTop[2][1]?></p>
+                </div> 
+                <div class="col-md-1"></div>
+            </div>
             <div class="row" style="margin-top: 10%;" > <!-- TIENE EL CONTENIDO BUENO CON LAS PREGUNTAS ETC-->
                 <div class="col-md-3" id="espacioIz"> </div>
                 <div class="col-md-6" id="contenedorTemas" > <!----------->
