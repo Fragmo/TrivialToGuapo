@@ -41,6 +41,8 @@ and open the template in the editor.
          define("usuario", "root");
          define("contrasena", "");
          define("bbdd", "trivial");
+         $_SESSION['nombreUsuario'] = $nombreUsuarioDeLosCojones;
+         
          
          $creaConexion = new mysqli(host, usuario, contrasena, bbdd);
          if($creaConexion->errno >0){
@@ -58,19 +60,18 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-3" id="trucoRastrero" ></div>
                 <div class="col-md-6" ><h1 class="text-center cambiaColorTexto">Trivial To Guapo!</h1></div>
-                <div class="col-md-3" > <button name="botonNombreUsuario" class="btn btn-warning text-center"><b>Hola <?php echo $_GET['usuario']; ?> <i class="fa fa-hand-peace-o" aria-hidden="true"></i></b></button>  <a href="index.php"><button id="botonSalirSesion" class="btn btn-primary pull-right"> <i class="fa fa-sign-out" aria-hidden="true"></i>Salir</button></a></div>
+                <div class="col-md-3" > <a href="usuario.php?usuario=<?php echo $nombreUsuarioDeLosCojones?>"><button name="botonNombreUsuario" class="btn btn-warning text-center"><b>Hola <?php echo $_GET['usuario']; ?> <i class="fa fa-hand-peace-o" aria-hidden="true"></i></b></button></a>  <a href="index.php"><button id="botonSalirSesion" class="btn btn-primary pull-right"> <i class="fa fa-sign-out" aria-hidden="true"></i>Salir</button></a></div>
             </div>
             <div class="row">
-                <div class="col-md-8"></div>
-                <div class="col-md-3">
-                    <h3>Top Usuarios</h3> 
-                    <p> Top 1: <?php echo $arrayTop[0][0]?> niveles totales : <?php echo $arrayTop[0][1]?></p>
-                    <p> Top 2: <?php echo $arrayTop[1][0]?> niveles totales : <?php echo $arrayTop[1][1]?></p>
-                    <p> Top 3: <?php echo $arrayTop[2][0]?> niveles totales : <?php echo $arrayTop[2][1]?></p>
+                <div class="col-md-3" style="color: white;">
+                    <b><h3>Top Usuarios</h3> 
+                    <p> Top 1: <?php echo $arrayTop[0][0]?> Niveles totales : <?php echo $arrayTop[0][1]?><!-- <a  href="serguidores.php?seguido= <<?php //echo $arrayTop[0][0]?>&seguidor=<?php// echo $nombreUsuarioDeLosCojones?>"><i class="fa fa-check" aria-hidden="true"></i></a>--></p>
+                    <p> Top 2: <?php echo $arrayTop[1][0]?> Niveles totales : <?php echo $arrayTop[1][1]?><!-- <a  href="serguidores.php?seguido=<?php //echo $arrayTop[1][0]?>&seguidor=<?php// echo $nombreUsuarioDeLosCojones?>"><i class="fa fa-check" aria-hidden="true"></i></a>--></p>
+                    <p> Top 3: <?php echo $arrayTop[2][0]?> Niveles totales : <?php echo $arrayTop[2][1]?><!-- <a  href="serguidores.php?seguido=<?php //echo $arrayTop[2][0]?>&seguidor=<?php// echo $nombreUsuarioDeLosCojones?>"><i class="fa fa-check" aria-hidden="true"></i></a>--></p><b>
                 </div> 
-                <div class="col-md-1"></div>
+                <div class="col-md-9"></div>
             </div>
-            <div class="row" style="margin-top: 10%;" > <!-- TIENE EL CONTENIDO BUENO CON LAS PREGUNTAS ETC-->
+            <div class="row" style="margin-top: 3%;" > <!-- TIENE EL CONTENIDO BUENO CON LAS PREGUNTAS ETC-->
                 <div class="col-md-3" id="espacioIz"> </div>
                 <div class="col-md-6" id="contenedorTemas" > <!----------->
                     <h3 class="text-center"><b id="negritaTemas">Elige un tema!</b></h3>
@@ -120,7 +121,7 @@ and open the template in the editor.
         // igualo el tema para returnarlo desde el primer momento y tenerlo almacenado       
                tema = id;
 
-                
+                puntuacion = 0;
                 $('#espacioIz').hide();
                 $('#containerTrivial').css({ 'float': 'left', 'margin-left' : '30px'});
                 $('#espacioDer').removeClass('col-md-3').addClass('col-md-6');
@@ -134,7 +135,7 @@ and open the template in the editor.
                 defineLaPutaVariable();
                 colocaBotonesEnEligeNivel();
                 
-        return tema;
+        return tema, puntuacion;
     }
 
     function defineLaPutaVariable (){ // define y carga la variable de cuantos 
