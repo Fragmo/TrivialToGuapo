@@ -14,9 +14,11 @@ and open the template in the editor.
 //        $preguntas = ($_SESSION['preguntasAJS']);
         
         error_reporting(0);
+        $usuarioNom= $_GET['usuario'];
         ?>
     <head>
-        <title>Trivial de <?php echo $nombreUsuarioDeLosCojones;?></title>
+        
+        <title>Trivial de <?php echo $usuarioNom;?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -38,7 +40,7 @@ and open the template in the editor.
          define("usuario", "root");
          define("contrasena", "");
          define("bbdd", "trivial");
-         $usuarioNom= $_GET['usuario'];
+         //MIRAAAAAAR ARRIBA ESTA LA VARIABLE DEL NOMBRE DE USUARIO, MIRAAAAAAAAR!!!!!
          $creaConexion = new mysqli(host, usuario, contrasena, bbdd);
          if($creaConexion->errno >0){
             die("No ha sido posible conectarse a la base de datos [". $creaConexion->connect_error. "]");
@@ -52,7 +54,32 @@ and open the template in the editor.
 //        print_r($consultasiguiendo);
         $ejecutasiguiendo = mysqli_query($creaConexion, $consultasiguiendo);
         $arraysiguiendo = mysqli_fetch_all($ejecutasiguiendo);
+        
+        function pinchaSeguidores ($creaConexion, $usuarioNom){   
+        $consultaPinchaSeguidores = "select seguidor from seguir where usuario ='$usuarioNom'";
+        $ejecutaPinchaSeguidores = mysqli_query($creaConexion, $consultaPinchaSeguidores);
+        $arrayPinchaSeguidores = mysqli_fetch_all($ejecutaPinchaSeguidores);
 
+        for ($i = 0; $i<count($arrayPinchaSeguidores); $i++){
+            $nombreSeguidor = $arrayPinchaSeguidores [$i][0];
+           
+            print ('<div><h2 class="text-center">'.(1+$i).' : '.$nombreSeguidor.' </h2></div>');
+
+         }
+        }
+        
+        function pinchaSeguidos($creaConexion, $usuarioNom){ 
+        $consultaPinchaSeguido = "select usuario from seguir where seguidor ='$usuarioNom'";
+        $ejecutaPinchaSeguido = mysqli_query($creaConexion, $consultaPinchaSeguido);
+        $arrayPinchaSeguido = mysqli_fetch_all($ejecutaPinchaSeguido);
+
+        for ($i = 0; $i<count($arrayPinchaSeguido); $i++){
+            $nombreSeguidor = $arrayPinchaSeguido [$i][0];
+            print ('<div><h2 class="text-center">'.(1+$i).' : '.$nombreSeguidor.' </h2></div>');
+
+         }
+        }
+        
         
         
         ?>
@@ -66,9 +93,30 @@ and open the template in the editor.
             </div>
             <div class="row">
                 <div class="col-md-4"></div>
-                <div class="col-md-4"><button class="btn btn-success" style="width: 50%;">Seguidores:<?php echo $arraySeguidores[0][0]?></button><button class="btn btn-success" style="width: 50%;">Siguiendo:<?php echo $arraysiguiendo[0][0]?></button></div>
+                <div class="col-md-4"><form method="post"><input type="submit" name="botonSeguidores" class="btn btn-success" style="width: 50%;" value="Seguidores:<?php echo $arraySeguidores[0][0]?>"/></button><input type="submit" name="botonSeguidos" class="btn btn-success" style="width: 50%;" value="Siguiendo:<?php echo $arraysiguiendo[0][0]?>"/></form></div>
                 <div class="col-md-4"></div>
             </div>
+            
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <?php
+                    if(isset($_POST['botonSeguidores'])){
+                        pinchaSeguidores($creaConexion,$usuarioNom);
+                        
+                    }
+                    
+                    if(isset($_POST['botonSeguidos'])){
+                        pinchaSeguidos($creaConexion,$usuarioNom);
+                        
+                    }
+                    
+                    ?>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            
+            
         </div><!--Container-->
 
         <script>
